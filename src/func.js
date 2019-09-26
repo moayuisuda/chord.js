@@ -1,13 +1,19 @@
 import {caculateChord, strToOptions} from './utils';
 
-function getChord(strOrOptions, range, signType) {
+function chord(strOrOptions, initOctave, signType) {
 
     if(Object.prototype.toString.call(strOrOptions) == '[object Object]') {
-        return caculate(strOrOptions, range, signType);
+        return caculate(strOrOptions, initOctave, signType);
     } else {
         let options = strToOptions(strOrOptions);
-        return caculateChord(options, range, signType);
+        return caculateChord(options, initOctave, signType);
     }
 }
 
-export {getChord};
+
+
+function scaleChords(root, type) {
+    
+}
+
+export {chord};

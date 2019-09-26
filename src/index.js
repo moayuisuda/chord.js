@@ -1,3 +1,5 @@
-import {getChord} from './func'
+import {chord} from './func'
+import * as utils from './utils';
 
-console.log(getChord('Dm', 1, 'b'));
+console.log(chord('Dm', 1, 'b'));
+// console.log(utils.getScale({}));

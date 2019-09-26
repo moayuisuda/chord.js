@@ -6,16 +6,13 @@ import {
 } from './source'
 
 
-function caculateChord(options, range, signType) {
+function caculateChord({root, type, add, omit, on}, initOctave, signType) {
     let
         result = [],
-        signIndex = (signType == '#' || !signType) ? 0 : 1,
-        intervalArr = typeToInterval(options.type),
-        rootInterval = noteMap[options.root];
+        intervalArr = typeToInterval(type),
+        rootInterval = noteMap[root];
 
-    intervalArr.push(rootInterval);
-
-    options.add.map(degree => {
+    add.map(degree => {
         intervalArr.push(degreeMap[degree]);
     })
 
@@ -23,37 +20,42 @@ function caculateChord(options, range, signType) {
         return a - b;
     });
 
-    for (let i = 0; i < options.omit.length; i++) {
+    for (let i = 0; i < omit.length; i++) {
         for (let j = 0; j < intervalArr.length; j++) {
-            if (options.omit[i] == intervalArr[j]);
+            if (omit[i] == intervalArr[j]);
             intervalArr.splice(i, 1);
         }
     }
 
-    result = intervalArrToNotes(rootInterval, intervalArr, range, signIndex);
-    if (options.on) replaceRoot(result, options.on, range);
+    let abInterval = absoluteInterval(rootInterval, intervalArr)
+    if (initOctave) result = intervalArrToNotesR(abInterval, initOctave, signType);
+    else result = intervalArrToNotes(abInterval, signType);
+
+    if (on) replaceRoot(result, on, initOctave);
     return result;
 }
 
 function typeToInterval(type) {
-    let result = typeMap[type];
-    if(!result) throw `can't find a chord type matched ${type}`;
+    let result = typeMap.get(type);
+    if (!result) throw `can't find a chord type matched ${type}`;
     return result;
 }
 
+function getSignIndex(signType) {
+    return (signType == '#' || !signType) ? 0 : 1;
+}
 
-function replaceRoot(result, note, range) {
-    if (range) {
+function replaceRoot(result, note, initOctave) {
+    if (initOctave) {
         let root = result[0];
         let flagInterval = noteMap[result[1]];
         let noteInterval = noteMap[note];
 
-        if(flagInterval = noteInterval) return;
-        else if(flagInterval > noteInterval) {
-            result.splice(0, 1, note + range);
-        }
-        else {
-            result.splice(0, 1, note + (range - 1));
+        if (flagInterval = noteInterval) return;
+        else if (flagInterval > noteInterval) {
+            result.splice(0, 1, note + initOctave);
+        } else {
+            result.splice(0, 1, note + (initOctave - 1));
         }
 
         result.push(getRoot(root) + (getNumber(root) + 1));
@@ -62,32 +64,59 @@ function replaceRoot(result, note, range) {
     }
 }
 
+function absoluteInterval(rootInterval, intervalArr) {
+    let result = [rootInterval];
+    let absoluteInterval;
 
-function intervalArrToNotes(rootInterval, intervalArr, range, signIndex) {
-    
-    let result = [];
+    for (let interval of intervalArr) {
+        absoluteInterval = rootInterval + interval;
+        result.push(absoluteInterval);
+    }
 
-    for (let i = 0; i < intervalArr.length; i ++) {
-        let interval = intervalArr[i];
+    return result;
+}
 
-        let absoluteInterval;
-        if(i > 0) absoluteInterval = rootInterval + interval;
-        else absoluteInterval = rootInterval;
+function intervalArrToNotesR(intervalArr, initOctave, signType) {
 
-        let octave = range;
-        while (absoluteInterval >= 12) {
-            absoluteInterval -= 12;
+    let result = [],
+        octave,
+        note,
+        noteKey,
+        signIndex = getSignIndex(signType);
+
+
+    for (let interval of intervalArr) {
+        octave = initOctave;
+        while (interval >= 12 && initOctave) {
+            interval -= 12;
             octave++;
         }
 
-        let note = intervalMap[absoluteInterval];
-        let noteKey = note[signIndex] ? note[signIndex] : note[0];
+        note = intervalMap[interval];
+        noteKey = note[signIndex] ? note[signIndex] : note[0];
 
-        if (range) {
-            result.push(noteKey + octave);
-        } else {
-            result.push(noteKey);
+        result.push(noteKey + octave);
+    }
+
+    return result;
+}
+
+function intervalArrToNotes(intervalArr, signType) {
+    let result = [],
+        note,
+        noteKey,
+        signIndex = getSignIndex(signType);
+
+    for (let interval of intervalArr) {
+        while (interval >= 12 && initOctave) {
+            interval -= 12;
         }
+
+        note = intervalMap[interval];
+        noteKey = note[signIndex] ? note[signIndex] : note[0];
+
+        result.push(noteKey);
+
     }
 
     return result;
@@ -102,11 +131,12 @@ function getNumber(str) {
     return Number(str.match(/\d/)[0]);
 }
 
+
 function getType(str) {
-    
+
     let result = null;
-    for (let i in typeMap) {
-        let reg = new RegExp(`^[A-G](#|b)?(${i}\\d{0,2})`);
+    for (let [key] of typeMap) {
+        let reg = new RegExp(`^[A-G](#|b)?(${key}\\d{0,2})`);
 
         if (result = str.match(reg)) {
             return result[2];
@@ -172,7 +202,22 @@ function reverseMap(map) {
     return newMap;
 }
 
+function getScale({
+    root,
+    type,
+    initOctave,
+    signType
+}) {
+    let rootInterval = noteMap[root];
+    let intervalArr = typeMap[type];
+    let abIntervals = absoluteIntervals(rootInterval, intervalArr);
+
+    if (initOctave) return intervalArrToNotesR(abIntervals, initOctave, signType);
+    else return intervalArrToNotes(abIntervals, signType);
+}
+
 export {
+    getScale,
     getRoot,
     getType,
     getAdd,
