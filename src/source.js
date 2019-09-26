@@ -71,8 +71,8 @@ let typeMap = new Map([
 ])
 
 let scaleMap = {
-    major: [2,2,1,2,2,2,1],
-    minor: [2,1,2,2,1,2,2]
+    'major': [2,2,1,2,2,2,1],
+    'minor': [2,1,2,2,1,2,2]
 }
 
 export {typeMap, noteMap, intervalMap, degreeMap, scaleMap}

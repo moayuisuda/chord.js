@@ -2,11 +2,18 @@ import {
     typeMap,
     noteMap,
     intervalMap,
-    degreeMap
+    degreeMap,
+    scaleMap
 } from './source'
 
 
-function caculateChord({root, type, add, omit, on}, initOctave, signType) {
+function caculateChord({
+    root,
+    type,
+    add,
+    omit,
+    on
+}, initOctave, signType) {
     let
         result = [],
         intervalArr = typeToInterval(type),
@@ -41,9 +48,6 @@ function typeToInterval(type) {
     return result;
 }
 
-function getSignIndex(signType) {
-    return (signType == '#' || !signType) ? 0 : 1;
-}
 
 function replaceRoot(result, note, initOctave) {
     if (initOctave) {
@@ -64,6 +68,7 @@ function replaceRoot(result, note, initOctave) {
     }
 }
 
+
 function absoluteInterval(rootInterval, intervalArr) {
     let result = [rootInterval];
     let absoluteInterval;
@@ -76,6 +81,8 @@ function absoluteInterval(rootInterval, intervalArr) {
     return result;
 }
 
+
+
 function intervalArrToNotesR(intervalArr, initOctave, signType) {
 
     let result = [],
@@ -87,7 +94,7 @@ function intervalArrToNotesR(intervalArr, initOctave, signType) {
 
     for (let interval of intervalArr) {
         octave = initOctave;
-        while (interval >= 12 && initOctave) {
+        while (interval >= 12) {
             interval -= 12;
             octave++;
         }
@@ -108,7 +115,7 @@ function intervalArrToNotes(intervalArr, signType) {
         signIndex = getSignIndex(signType);
 
     for (let interval of intervalArr) {
-        while (interval >= 12 && initOctave) {
+        while (interval >= 12) {
             interval -= 12;
         }
 
@@ -131,7 +138,6 @@ function getNumber(str) {
     return Number(str.match(/\d/)[0]);
 }
 
-
 function getType(str) {
 
     let result = null;
@@ -143,7 +149,6 @@ function getType(str) {
         }
     }
 }
-
 
 function getAdd(str) {
     let result = [];
@@ -157,7 +162,6 @@ function getAdd(str) {
     return result;
 }
 
-
 function getOmit(str) {
     let result = [];
     let reg = /omit(\d{1,2})/g;
@@ -170,12 +174,15 @@ function getOmit(str) {
     return result;
 }
 
-
 function getOn(str) {
     let result = str.match(/\/([A-G](#|b)?)/);
     if (result) {
         return result[1];
     }
+}
+
+function getSignIndex(signType) {
+    return (signType == '#' || !signType) ? 0 : 1;
 }
 
 
@@ -202,19 +209,35 @@ function reverseMap(map) {
     return newMap;
 }
 
+
 function getScale({
     root,
     type,
     initOctave,
-    signType
+    signType = '#'
 }) {
-    let rootInterval = noteMap[root];
-    let intervalArr = typeMap[type];
-    let abIntervals = absoluteIntervals(rootInterval, intervalArr);
+    let rootInterval = noteMap[root],
+        scale = scaleMap[type],
+        intervalArr = scaleToInterval(scale),
+        abIntervals = absoluteInterval(rootInterval, intervalArr);
 
     if (initOctave) return intervalArrToNotesR(abIntervals, initOctave, signType);
     else return intervalArrToNotes(abIntervals, signType);
 }
+
+function scaleToInterval(intervalArr) {
+    let result = [];
+
+    for (let i = 0; i < intervalArr.length; i++) {
+        if (!i) result.push(intervalArr[i]);
+        else {
+            result.push(result[i - 1] + intervalArr[i]);
+        }
+    }
+
+    return result;
+}
+
 
 export {
     getScale,
