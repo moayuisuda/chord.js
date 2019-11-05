@@ -12,15 +12,16 @@ let typeMap = {
     7: [3, 7, 11],
     9: [3, 7, 11, 14],
     11: [3, 7, 11, 14, 17],
-    M: [4, 7],
     m: [3, 7],
+    '': [4, 7]
 }
 
 let intervalMap = {
     0: ['C'],
     1: ['C#', 'Db'],
     2: ['D'],
-    3: ['E'],
+    3: ['D#', 'Bb'],
+    4: ['E'],
     5: ['F'],
     6: ['F#', 'Gb'],
     7: ['G'],
@@ -52,7 +53,7 @@ let noteMap = {
     'B': 11,
 }
 
-let degreeToIntervalMap = {
+let degreeMap = {
     2: 2,
     3: 4,
     4: 5,
@@ -69,4 +70,4 @@ let degreeToIntervalMap = {
     15: 24 //1
 }
 
-export {typeMap, noteMap, intervalMap}
+export {typeMap, noteMap, intervalMap, degreeMap}

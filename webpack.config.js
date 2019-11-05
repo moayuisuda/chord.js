@@ -10,7 +10,7 @@ module.exports = {
         libraryTarget: 'umd',
         library: 'chords',
         path: path.resolve(__dirname, './dist'),
-        filename: 'chord.js'
+        filename: 'chords.js'
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist')

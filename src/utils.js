@@ -2,37 +2,87 @@ import {
     typeMap,
     noteMap,
     intervalMap,
-    degreeToIntervalMap
+    degreeMap
 } from './source'
 
-function caculateChord(options, range, signType) {
-    let signIndex = (signType == '#' || !signType) ? 0 : 1;
 
-    let intervalArr = typeMap[options.type];
+function caculateChord(options, range, signType) {
+    let
+        result = [],
+        signIndex = (signType == '#' || !signType) ? 0 : 1,
+        intervalArr = typeToInterval(options.type),
+        rootInterval = noteMap[options.root];
+
+    intervalArr.push(rootInterval);
+
     options.add.map(degree => {
-        intervalArr.push(degreeToIntervalMap[degree]);
+        intervalArr.push(degreeMap[degree]);
     })
 
-    for(let i = 0; i < options.omit.length; i++) {
-        for(let j = 0; j < intervalArr.length; j++) {
-            if(options.omit[i] == intervalArr[j]);
+    intervalArr.sort((a, b) => {
+        return a - b;
+    });
+
+    for (let i = 0; i < options.omit.length; i++) {
+        for (let j = 0; j < intervalArr.length; j++) {
+            if (options.omit[i] == intervalArr[j]);
             intervalArr.splice(i, 1);
         }
     }
 
-    let rootInterval = noteMap[options.root];
+    result = intervalArrToNotes(rootInterval, intervalArr, range, signIndex);
+    if (options.on) replaceRoot(result, options.on, range);
+    return result;
+}
 
-    let result = [options.root];
+function typeToInterval(type) {
+    let result = typeMap[type];
+    if(!result) throw `can't find a chord type matched ${type}`;
+    return result;
+}
 
 
-    for (let interval of intervalArr) {
+function replaceRoot(result, note, range) {
+    if (range) {
+        let root = result[0];
+        let flagInterval = noteMap[result[1]];
+        let noteInterval = noteMap[note];
+
+        if(flagInterval = noteInterval) return;
+        else if(flagInterval > noteInterval) {
+            result.splice(0, 1, note + range);
+        }
+        else {
+            result.splice(0, 1, note + (range - 1));
+        }
+
+        result.push(getRoot(root) + (getNumber(root) + 1));
+    } else {
+        result.unshift(note);
+    }
+}
+
+
+function intervalArrToNotes(rootInterval, intervalArr, range, signIndex) {
+    
+    let result = [];
+
+    for (let i = 0; i < intervalArr.length; i ++) {
+        let interval = intervalArr[i];
+
+        let absoluteInterval;
+        if(i > 0) absoluteInterval = rootInterval + interval;
+        else absoluteInterval = rootInterval;
+
         let octave = range;
-        while (interval >= 12) {
-            interval = interval - 12;
+        while (absoluteInterval >= 12) {
+            absoluteInterval -= 12;
             octave++;
         }
 
-        let noteKey = intervalMap[rootInterval + interval][signIndex];
+        let note = intervalMap[absoluteInterval];
+        let noteKey = note[signIndex] ? note[signIndex] : note[0];
+
         if (range) {
             result.push(noteKey + octave);
         } else {
@@ -43,11 +93,17 @@ function caculateChord(options, range, signType) {
     return result;
 }
 
+
 function getRoot(str) {
-    return str.slice(0, 1);
+    return str.match(/[A-G](#|b)?/)[0];
+}
+
+function getNumber(str) {
+    return Number(str.match(/\d/)[0]);
 }
 
 function getType(str) {
+    
     let result = null;
     for (let i in typeMap) {
         let reg = new RegExp(`^[A-G](#|b)?(${i}\\d{0,2})`);
@@ -57,6 +113,7 @@ function getType(str) {
         }
     }
 }
+
 
 function getAdd(str) {
     let result = [];
@@ -70,6 +127,7 @@ function getAdd(str) {
     return result;
 }
 
+
 function getOmit(str) {
     let result = [];
     let reg = /omit(\d{1,2})/g;
@@ -82,12 +140,14 @@ function getOmit(str) {
     return result;
 }
 
+
 function getOn(str) {
     let result = str.match(/\/([A-G](#|b)?)/);
     if (result) {
         return result[1];
     }
 }
+
 
 function strToOptions(str) {
     let options = {
@@ -101,6 +161,7 @@ function strToOptions(str) {
     return options;
 }
 
+
 function reverseMap(map) {
     let newMap = Object.create(null);
 
@@ -110,8 +171,6 @@ function reverseMap(map) {
 
     return newMap;
 }
-
-
 
 export {
     getRoot,
