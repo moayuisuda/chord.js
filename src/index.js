@@ -1,5 +1,23 @@
-import {chord} from './func'
-import * as utils from './utils';
+import {caculateChord, caculateScaleChords} from './caculators';
+import {strToOptions} from './utils';
 
-console.log(chord('Dm', 1, 'b'));
-console.log(utils.getScale({root: 'E', type: 'minor', initOctave: 1}));
+
+
+function chord(strOrOptions, initOctave, signType) {
+
+    // validateChord(arguments);
+
+    return (Object.prototype.toString.call(strOrOptions) === '[object Object]')
+    ? caculateChord(strOrOptions, initOctave, signType)
+    : caculateChord(strToOptions(strOrOptions), initOctave, signType);
+}
+
+
+function scaleChords(options, initOctave, signType) {
+
+    // validateScaleChords(arguments);
+
+    return caculateScaleChords(options, initOctave, signType);
+}
+
+export {chord, scaleChords};

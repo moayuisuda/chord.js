@@ -1,8 +1,8 @@
-let reg = new RegExp(`ican't fall in love`);
-// let reg = new RegExp('ican't fall in love');
-// let reg = new RegExp("ican't fall in love");
-console.log('\dsdwwwsa');
+let arr = [1,2,3,4,5];
+let result = [];
 
-// 在字符串中的\d(仅表示一个d)和在字面量正则中的\d是不同的
+for(var i = 0; i < arr.length; i ++) {
+    result.push(() => i)
+}
 
-console.log(/\d/)
+console.log(result);
