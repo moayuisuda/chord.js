@@ -1,9 +1,9 @@
 {
-  "name": "chords",
+  "name": "rad.js",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/chords.js",
-  "types": "chords.t.js",
+  "main": "dist/rad.js",
+  "types": "rad.t.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
@@ -14,7 +14,9 @@
     "url": "git+https://github.com/moayuisuda/chords.js.git"
   },
   "keywords": [
-    "chords"
+    "chords",
+    "chord",
+    "music"
   ],
   "author": "moayuisuda",
   "license": "ISC",
