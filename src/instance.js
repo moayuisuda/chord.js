@@ -1,59 +1,29 @@
-import {
-    chord,
-    scaleChords
-} from './rad.js/index'
 import './theme/index.css'
 import {
-    PolySynth,
+    Transport,
     Synth,
-    Transport
+    context
 } from 'tone'
 
-function antiShake(fn) {
-    let timer = null;
+import {
+    initChord
+} from './initChord';
+import {
+    initScaleChords
+} from './initScaleChords'
 
-    return function (e) {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            fn(e);
-        }, 2000);
-    }
+function updateTime() {
+    requestAnimationFrame(updateTime)
+    //the time elapsed in seconds
+    document.querySelector('#seconds').textContent = Transport.seconds.toFixed(2)
+    //the AudioContext time
+    document.querySelector('#time').textContent = context.currentTime.toFixed(2)
 }
+updateTime()
 
 Transport.bpm.value = 120;
-let synth = new Synth({
-    oscillator: {
-        type: 'sine'
-    }
-}).toMaster();
 
-document.querySelector('.chord_input').addEventListener('input', antiShake(onChordInput));
+var synth = new Synth().toMaster()
 
-function onChordInput(e) {
-    let text = e.target.value;
-    console.log(text);
-    let result
-    try {
-        result = chord(text, 4);
-    } catch(e) {
-        console.log(e);
-        return;
-    }
-    console.log('result', result);
-    if (result) {
-        //set the attributes using the set interface
-        //play a chord
-
-        for (let i = 0; i <= result.length; i++) {
-            Transport.schedule(function () {
-
-                if (i == result.length) {
-                    Transport.stop();
-                    Transport.cancel()
-                } else synth.triggerAttackRelease(result[i], '4n');
-            }, `0:${i}:0`);
-        }
-
-        Transport.start();
-    }
-}
+initChord();
+initScaleChords();

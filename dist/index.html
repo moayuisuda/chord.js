@@ -10,6 +10,8 @@
 
 <body>
     <div class="main">
+        <h2 id="seconds"></h2>
+        <h2 id="time"></h2>
         <div id="chord">
             <h2>Chord</h2>
             <input type="text" class="chord_input" />
@@ -17,7 +19,13 @@
         </div>
 
         <div id="scaleChords">
-            <input type="text" class="scaleChords_input" />
+            <input type="text" class="scaleChords_root" />
+            <select type="text" class="scaleChords_type">
+                <option value="minor">minor</option>
+                <option value="major">major</option>
+            </select>
+            7<input type="checkbox" class="scaleChords_seven">
+            <button type="text" class="scaleChords_btn">Generate</button>
             <div class="scaleChords_result"></div>
         </div>
     </div>

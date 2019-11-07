@@ -24,8 +24,8 @@ function caculateChord({
 
     for (let i = 0; i < omit.length; i++) {
         for (let j = 0; j < intervalArr.length; j++) {
-            if (omit[i] == intervalArr[j]);
-            intervalArr.splice(i, 1);
+            if (omit[i] == intervalArr[j])
+                intervalArr.splice(i, 1);
         }
     }
 
@@ -54,7 +54,8 @@ function caculateScale({
 
 function caculateScaleChords({
     root,
-    type
+    type,
+    seven
 }, initOctave, signType = '#') {
     let
         chordsArr = [],
@@ -66,7 +67,10 @@ function caculateScaleChords({
 
     // get the intervalArr with three more notes in a scale
     extendIntervalArr = extendIntervalArr.concat(abIntervalArr);
-    for (let i = 1; i < 5; i++) {
+
+    if (seven) length = 7;
+    else length = 5;
+    for (let i = 1; i < length; i++) {
         extendIntervalArr.push(abIntervalArr[i] + 12);
     }
 
@@ -75,7 +79,8 @@ function caculateScaleChords({
         conve.intervalArrToNotes(extendIntervalArr, initOctave);
 
     for (let i = 0; i < abIntervalArr.length; i++) {
-        chordsArr.push([notes[i], notes[i + 2], notes[i + 4]]);
+        if(seven) chordsArr.push([notes[i], notes[i + 2], notes[i + 4], notes[i + 6]]);
+        else chordsArr.push([notes[i], notes[i + 2], notes[i + 4]]);
     }
 
     return chordsArr;
