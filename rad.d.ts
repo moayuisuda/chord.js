@@ -9,13 +9,14 @@ interface intervalsArr {
 interface options {
     root: string,
     type: string,
-    add: [string, notesArr],
-    omit: [string, notesArr],
-    on: string
+    add?: [string, notesArr],
+    omit?: [string, notesArr],
+    on?: string
 }
 
-function chord(options: options, range?: string, signType?: string): notesArr
 
-function scale(root: string, type: string): notesArr
+function chord(options: options, initOctave?: string, signType?: string): notesArr
 
-function scaleChords(root: string, type: string): notesArr[]
+function scale(options: options, initOctave?: string, signType?: string): notesArr
+
+function scaleChords(options: options, initOctave?: string, signType?: string): notesArr[]
