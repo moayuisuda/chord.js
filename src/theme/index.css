@@ -1,0 +1,29 @@
+:root {
+    --black: #000000;
+    --middle: #5b7e92;
+    --white: #ffffff;
+    --outline: #1a73af
+}
+
+body {
+    margin: 0;
+}
+
+
+* {
+    outline: 1px solid ;
+}
+
+.main {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+#chord {
+    
+}
+
+#scaleChord {
+
+}

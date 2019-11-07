@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <div class="main">
+        <div id="chord">
+            <h2>Chord</h2>
+            <input type="text" class="chord_input" />
+            <div class="chord_result"></div>
+        </div>
+
+        <div id="scaleChords">
+            <input type="text" class="scaleChords_input" />
+            <div class="scaleChords_result"></div>
+        </div>
+    </div>
 </body>
-<script src="./rad.js">
+
+<script src="./index.js">
 </script>
 
-<script>
-console.log(rad.chord('Dm', 1, 'b'), rad.scaleChords({root: 'C', type: 'major'}, 1));
-</script>
 </html>
