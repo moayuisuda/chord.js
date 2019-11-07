@@ -1,11 +1,9 @@
-import {caculateChord, caculateScaleChords} from './caculators';
+import {caculateChord, caculateScaleChords, caculateScale} from './caculators';
 import {strToOptions} from './utils';
 
 
 
 function chord(strOrOptions, initOctave, signType) {
-
-    // validateChord(arguments);
 
     return (Object.prototype.toString.call(strOrOptions) === '[object Object]')
     ? caculateChord(strOrOptions, initOctave, signType)
@@ -13,11 +11,15 @@ function chord(strOrOptions, initOctave, signType) {
 }
 
 
+function scale(options, initOctave, signType) {
+    return caculateScale(options, initOctave, signType);
+}
+
+
 function scaleChords(options, initOctave, signType) {
-
-    // validateScaleChords(arguments);
-
     return caculateScaleChords(options, initOctave, signType);
 }
 
-export {chord, scaleChords};
+
+
+export {chord, scale, scaleChords};

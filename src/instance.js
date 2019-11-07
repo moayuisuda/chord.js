@@ -21,26 +21,36 @@ function antiShake(fn) {
 }
 
 Transport.bpm.value = 120;
-let synth = new Synth().toMaster();
+let synth = new Synth({
+    oscillator: {
+        type: 'sine'
+    }
+}).toMaster();
 
 document.querySelector('.chord_input').addEventListener('input', antiShake(onChordInput));
 
 function onChordInput(e) {
     let text = e.target.value;
-    let result = chord(text, 4);
+    console.log(text);
+    let result
+    try {
+        result = chord(text, 4);
+    } catch(e) {
+        console.log(e);
+        return;
+    }
     console.log('result', result);
     if (result) {
         //set the attributes using the set interface
         //play a chord
-        
-        for(let i = 0;  i <= result.length; i ++) {
-            Transport.schedule(function(){
 
-                if(i == result.length) {
+        for (let i = 0; i <= result.length; i++) {
+            Transport.schedule(function () {
+
+                if (i == result.length) {
                     Transport.stop();
-                }
-
-                else synth.triggerAttackRelease(result[i], '4n');
+                    Transport.cancel()
+                } else synth.triggerAttackRelease(result[i], '4n');
             }, `0:${i}:0`);
         }
 

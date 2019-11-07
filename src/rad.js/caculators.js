@@ -1,9 +1,5 @@
 import * as utils from './utils';
-import {
-    noteMap,
-    degreeMap,
-    scaleMap
-} from './maps'
+import * as conve from './converters'
 
 function caculateChord({
     root,
@@ -14,11 +10,12 @@ function caculateChord({
 }, initOctave, signType = '#') {
     let
         result = [],
-        intervalArr = utils.typeToInterval(type),
-        rootInterval = noteMap[root];
+        intervalArr = conve.typeToIntervalArr(type),
+        rootInterval = conve.noteToInterval(root);
+
 
     add.map(degree => {
-        intervalArr.push(degreeMap[degree]);
+        intervalArr.push(conve.degreeToInterval(degree));
     })
 
     intervalArr.sort((a, b) => {
@@ -32,13 +29,28 @@ function caculateChord({
         }
     }
 
-    let abInterval = utils.absoluteIntervalArr(rootInterval, intervalArr)
-    if (initOctave) result = utils.intervalArrToNotesO(abInterval, initOctave, signType);
-    else result = utils.intervalArrToNotes(abInterval, signType);
+    let abInterval = conve.absoluteIntervalArr(rootInterval, intervalArr)
+    if (initOctave) result = conve.intervalArrToNotesO(abInterval, initOctave, signType);
+    else result = conve.intervalArrToNotes(abInterval, signType);
 
     if (on) utils.replaceRoot(result, on, initOctave);
     return result;
 }
+
+
+function caculateScale({
+    root,
+    type,
+}, initOctave, signType = '#') {
+    let rootInterval = conve.noteToInterval(root),
+        scale = typeToScale[type],
+        intervalArr = conve.scaleToIntervalArr(scale),
+        abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
+
+    if (initOctave) return conve.intervalArrToNotesO(abIntervalArr, initOctave, signType);
+    else return conve.intervalArrToNotes(abIntervalArr, signType);
+}
+
 
 function caculateScaleChords({
     root,
@@ -48,19 +60,19 @@ function caculateScaleChords({
         chordsArr = [],
         extendIntervalArr = [],
 
-        rootInterval = noteMap[root],
-        intervalArr = utils.scaleToInterval(scaleMap[type]),
-        abIntervalArr = utils.absoluteIntervalArr(rootInterval, intervalArr);
+        rootInterval = conve.noteToInterval(root),
+        intervalArr = conve.scaleToIntervalArr(conve.typeToScale(type)),
+        abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
 
-    // get the intervals with three more notes in a scale
+    // get the intervalArr with three more notes in a scale
     extendIntervalArr = extendIntervalArr.concat(abIntervalArr);
     for (let i = 1; i < 5; i++) {
         extendIntervalArr.push(abIntervalArr[i] + 12);
     }
 
     let notes = initOctave ?
-        utils.intervalArrToNotesO(extendIntervalArr, initOctave, signType) :
-        utils.intervalArrToNotes(extendIntervalArr, initOctave);
+        conve.intervalArrToNotesO(extendIntervalArr, initOctave, signType) :
+        conve.intervalArrToNotes(extendIntervalArr, initOctave);
 
     for (let i = 0; i < abIntervalArr.length; i++) {
         chordsArr.push([notes[i], notes[i + 2], notes[i + 4]]);
@@ -71,5 +83,6 @@ function caculateScaleChords({
 
 export {
     caculateChord,
-    caculateScaleChords
+    caculateScaleChords,
+    caculateScale
 }
