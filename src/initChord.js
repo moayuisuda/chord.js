@@ -25,6 +25,7 @@ function initChord() {
         }
     }).toMaster();
 
+
     document.querySelector('.chord_input').addEventListener('input', antiShake(onChordInput));
 
     function onChordInput(e) {
@@ -41,7 +42,8 @@ function initChord() {
         if (result) {
             //set the attributes using the set interface
             //play a chord
-
+            Transport.stop();
+            Transport.cancel();
             for (let i = 0; i <= result.length; i++) {
                 Transport.schedule(function () {
                     if (i == result.length) {
@@ -51,6 +53,7 @@ function initChord() {
                 }, `0:${i}:0`);
             }
 
+            
             Transport.start();
         }
     }

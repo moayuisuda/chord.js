@@ -1,0 +1,10 @@
+:root {
+    --black: #000000;
+    --middle: #5b7e92;
+    --white: #ffffff;
+    --outline: #1a73af
+}
+
+.focus {
+    background-color: var(--middle);
+}

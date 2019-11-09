@@ -16,8 +16,8 @@ function scale(options, initOctave, signType) {
 }
 
 
-function scaleChords(options, initOctave, signType) {
-    return caculateScaleChords(options, initOctave, signType);
+function scaleChords(options) {
+    return caculateScaleChords(options);
 }
 
 

@@ -109,7 +109,15 @@ function copy(obj) {
     return result;
 }
 
+function mapStringfy(map) {
+    
+    let stringMap = {};
+    for(let [key, value] of map.entries()) {
+        stringMap[value.join('-')] = key;
+    }
 
+    return stringMap;
+}
 
 export {
     getRoot,
@@ -118,5 +126,6 @@ export {
     strToOptions,
     replaceRoot,
     getSignIndex,
-    copy
+    copy,
+    mapStringfy
 }

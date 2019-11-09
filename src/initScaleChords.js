@@ -1,17 +1,18 @@
 import {
-    scaleChords
+    scaleChords,
+    chord
 } from './rad.js/index'
 
 import {
-    AMSynth,
     Loop,
     Transport,
     Sampler,
-    time
+    Time
 } from 'tone'
 
 
 function initScaleChords() {
+    console.log('time',Time('8n') + Time('8n'));
     let instrumentName = 'piano';
     let synth = new Sampler({
         'A4': 'file/' + instrumentName + '/A4.wav',
@@ -35,14 +36,12 @@ function initScaleChords() {
         let index = typeSelector.selectedIndex; // 选中索引
         let type = typeSelector.options[index].value; // 选中值
         
-        let seven = document.querySelector('.scaleChords_seven').checked;
         let result
         try {
             result = scaleChords({
                 root,
-                type,
-                seven
-            }, 4);
+                type
+            });
         } catch (e) {
             console.log(e);
             return;
@@ -54,17 +53,18 @@ function initScaleChords() {
                 container.removeChild(container.childNodes[0]);
             }
 
-            for (let chord of result) {
-                let text = chord.join(' · ');
+            for (let chordName of result) {
+                let notes = chord(chordName, 4);
+                let text = chordName;
                 let el = document.createElement('button');
                 el.addEventListener('click', function () {
                     Transport.cancel();
                     Transport.stop();
                     let i = 0;
                     
-                    new Loop(function(time){
-                        synth.triggerAttackRelease(chord[i % chord.length]);
-                        console.log(chord[i % chord.length]);
+                    new Loop(function(){
+                        synth.triggerAttackRelease(notes[i % notes.length]);
+                        console.log(notes[i % notes.length]);
                         i ++;
                     }, "8n").start(0).stop("1n");
                     Transport.start();

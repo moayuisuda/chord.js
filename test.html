@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+let typeMap = new Map([
+    ['m7', [3, 7, 10]],
+    ['m9', [3, 7, 10, 14]],
+    ['m11', [3, 7, 10, 14, 17]],
+    ['M7', [4, 7, 11]],
+    ['M9', [4, 7, 11, 14]],
+    ['M11', [4, 7, 10, 14, 17]],
+    ['aug', [4, 8]],
+    ['dim', [3, 6]],
+    ['sus2', [2, 7]],
+    ['sus4', [5, 7]],
+    ['7', [3, 7, 11]],
+    ['9', [3, 7, 11, 14]],
+    ['11', [3, 7, 11, 14, 17]],
+    ['m', [3, 7]],
+    ['', [4, 7]]
+])
+
+function mapStringfy(map) {
+    let stringMap = {};
+    for(let [key, value] of map.entries()) {
+        stringMap[value.join('-')] = key;
+    }
+
+    return stringMap;
+}
+// debugger
+console.log(mapStringfy(typeMap));
+</script>
+</html>

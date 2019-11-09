@@ -11,19 +11,18 @@ import {
 import {
     initScaleChords
 } from './initScaleChords'
+// import {initProgression} from './initProgression';
 
 function updateTime() {
-    requestAnimationFrame(updateTime)
-    //the time elapsed in seconds
-    document.querySelector('#seconds').textContent = Transport.seconds.toFixed(2)
-    //the AudioContext time
-    document.querySelector('#time').textContent = context.currentTime.toFixed(2)
+    requestAnimationFrame(updateTime);
+    document.querySelector('#seconds').textContent = Transport.seconds.toFixed(2);
+    document.querySelector('#time').textContent = context.currentTime.toFixed(2);
 }
+
 updateTime()
 
-Transport.bpm.value = 120;
-
-var synth = new Synth().toMaster()
+Transport.bpm.value = 90;
 
 initChord();
 initScaleChords();
+// initProgression();
