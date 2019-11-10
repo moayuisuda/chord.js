@@ -3,7 +3,7 @@ import {
 } from './progression/index'
 
 function initProgression() {
-    new Progression(document.querySelector(".progression_input--result"), 90);
+    new Progression(document.querySelector("#progression"), 90);
 }
 
 export {

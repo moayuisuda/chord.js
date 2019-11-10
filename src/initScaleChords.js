@@ -6,26 +6,15 @@ import {
 import {
     Loop,
     Transport,
-    Sampler,
-    Time
+    Synth
 } from 'tone'
 
 
 function initScaleChords() {
-    console.log('time',Time('8n') + Time('8n'));
-    let instrumentName = 'piano';
-    let synth = new Sampler({
-        'A4': 'file/' + instrumentName + '/A4.wav',
-        'C4': 'file/' + instrumentName + '/C4.wav',
-        'D#4': 'file/' + instrumentName + '/DSharp4.wav',
-        'F#4': 'file/' + instrumentName + '/FSharp4.wav',
-    }, {
-        onload: () => {
-            
-        },
-        baseUrl: 'http://localhost:3000/',
-        release: 0.4,
-        attack: 0
+    let synth = new Synth({
+        oscillator: {
+            type: 'sine'
+        }
     }).toMaster();
 
     document.querySelector('.scaleChords_btn').addEventListener('click', onScaleChords);
@@ -63,7 +52,7 @@ function initScaleChords() {
                     let i = 0;
                     
                     new Loop(function(){
-                        synth.triggerAttackRelease(notes[i % notes.length]);
+                        synth.triggerAttackRelease(notes[i % notes.length], '8n');
                         console.log(notes[i % notes.length]);
                         i ++;
                     }, "8n").start(0).stop("1n");
