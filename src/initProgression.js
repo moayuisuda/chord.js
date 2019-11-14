@@ -1,9 +1,9 @@
 import {
-    Progression
-} from './progression/index'
+    instance
+} from './progression/index_rebuild'
 
 function initProgression() {
-    new Progression(document.querySelector("#progression"), 90);
+    instance.$mount('#progression');
 }
 
 export {

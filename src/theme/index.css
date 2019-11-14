@@ -1,29 +1,77 @@
 :root {
-    --black: #000000;
-    --middle: #5b7e92;
-    --white: #ffffff;
-    --outline: #1a73af
+    --main_color: #abdcea;
+    --main2_color: #1a73af;
+    --grey_color: #aaaaaa;
+    --focus_color: #fe92a1;
+    --lightPink_color: #fee0e2;
+    --text_color: #010204;
+    --yellow_color: #fff3e3;
+    --white_color: #ffffff
 }
 
 body {
     margin: 0;
+    color: var(--text_color);
 }
 
-
-* {
-    outline: 1px solid ;
+h2 {
+    display: inline-block;
 }
 
 .main {
-    height: 100vh;
-    width: 100vw;
     overflow: hidden;
+    padding-left: 100px;
 }
 
-#chord {
-    
+input {
+    width: 50px;
 }
 
-#scaleChord {
+.logo {
+    color: var(--main2_color);
+    position: fixed;
+    right: 50px;
+    top: 30px;
+    font-size: 50px;
+}
 
+.show {
+    height: 100vh;
+}
+
+.progression {
+    height: 100vh;
+}
+
+button {
+    color: var(--white_color);
+    background-color: var(--main_color);
+    border: none;
+    cursor: pointer;
+}
+
+button+button {
+    margin-left: 5px;
+}
+
+.button--focus {
+    background-color: var(--focus_color);
+    color: var(--white_color);
+}
+
+button:active {
+    background-color: var(--focus_color);
+}
+
+.module {
+    padding: 10px;
+}
+
+
+.scaleChords .result_item+.result_item {
+    margin-left: 10px;
+}
+
+.chord .result_item+.result_item {
+    margin-left: 10px;
 }

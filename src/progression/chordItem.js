@@ -1,30 +1,32 @@
-import {Transport} from 'tone'
+import {Transport, context, Time} from 'tone'
+import { transcode } from 'buffer';
 
 
-class ChoedItem {
-    constructor({chord, loop, time, el, progression}) {
+class ChordItem {
+    constructor({chord, loop, time, single, amount, instance}) {
+        this.chord = chord;
         this.loop = loop;
         this.time = time;
-        this.el = el;
-        this.isplaying = false;
-        this.progression = progression;
+        this.single = single,
+        this.amount = amount,
+        this.instance = instance;
     }
 
     focus() {
-        if(!this.isplaying) {
-            Transport.stop();
-            Transport.start(this.start);
-            Transport.stop(this.stop);
-            this.el.classList.add('focus');
-        } else {
-            Transport.start(this.start);
-            this.pregression.setIndex(this.index);
+        Transport.position = Time(this.start) - Time('32n');
+        if(!this.instance.playing) {
+            Transport.start();
+            Transport.stop(context.currentTime + this.time);
         }
     }
 
-    blur() {
-        this.el.classList.remove('focus');
+    setFlag() {
+        this.instance.flag = this.flag;
+    }
+
+    overFlag() {
+        this.instance.flag ++;
     }
 }
 
-export {ChoedItem}
+export {ChordItem}

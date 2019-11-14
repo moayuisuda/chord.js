@@ -2,61 +2,43 @@ import {
     chord
 } from './rad.js/index'
 
-import {
-    Synth,
-    Transport
-} from 'tone'
-
 function initChord() {
-    function antiShake(fn) {
-        let timer = null;
+    let nameEl = document.querySelector('.chord_name');
+    let octaveEl = document.querySelector('.chord_octave');
+    octaveEl.value = 4;
 
-        return function (e) {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                fn(e);
-            }, 2000);
-        }
-    }
+    document.querySelector('.chord_btn').addEventListener('click', getChordArr)
 
-    let synth = new Synth({
-        oscillator: {
-            type: 'sine'
-        }
-    }).toMaster();
+    function getChordArr(e) {
+        let name = nameEl.value;
+        let octave = octaveEl.value;
 
-
-    document.querySelector('.chord_input').addEventListener('input', antiShake(onChordInput));
-
-    function onChordInput(e) {
-        let text = e.target.value;
-        console.log(text);
         let result
         try {
-            result = chord(text, 4);
+            result = chord(name, octave);
         } catch (e) {
             console.log(e);
             return;
         }
-        console.log('result', result);
+
+        let container = document.querySelector('.chord_result');
         if (result) {
-            //set the attributes using the set interface
-            //play a chord
-            Transport.stop();
-            Transport.cancel();
-            for (let i = 0; i <= result.length; i++) {
-                Transport.schedule(function () {
-                    if (i == result.length) {
-                        Transport.stop();
-                        Transport.cancel()
-                    } else synth.triggerAttackRelease(result[i], '4n');
-                }, `0:${i}:0`);
+            while (container.childNodes[0]) {
+                container.removeChild(container.childNodes[0]);
             }
 
-            
-            Transport.start();
+            for (let noteName of result) {
+                let text = noteName;
+                let el = document.createElement('span');
+                el.className = 'result_item';
+                el.innerHTML = text;
+                container.appendChild(el);
+            }
+
         }
     }
 }
 
-export {initChord}
+export {
+    initChord
+}

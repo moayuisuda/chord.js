@@ -1,21 +1,9 @@
 import {
-    scaleChords,
-    chord
+    scaleChords
 } from './rad.js/index'
-
-import {
-    Loop,
-    Transport,
-    Synth
-} from 'tone'
 
 
 function initScaleChords() {
-    let synth = new Synth({
-        oscillator: {
-            type: 'sine'
-        }
-    }).toMaster();
 
     document.querySelector('.scaleChords_btn').addEventListener('click', onScaleChords);
 
@@ -43,22 +31,9 @@ function initScaleChords() {
             }
 
             for (let chordName of result) {
-                let notes = chord(chordName, 4);
                 let text = chordName;
-                let el = document.createElement('button');
-                el.addEventListener('click', function () {
-                    Transport.cancel();
-                    Transport.stop();
-                    let i = 0;
-                    
-                    new Loop(function(){
-                        synth.triggerAttackRelease(notes[i % notes.length], '8n');
-                        console.log(notes[i % notes.length]);
-                        i ++;
-                    }, "8n").start(0).stop("1n");
-                    Transport.start();
-                    // Transport.cancel();
-                })
+                let el = document.createElement('span');
+                el.className = 'result_item';
                 el.innerHTML = text;
                 container.appendChild(el);
             }
