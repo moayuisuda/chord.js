@@ -1,6 +1,6 @@
 <template>
     <div class="module progression" id="progression">
-        <h1>Progression</h1>
+        <h1>PROGRESSION</h1>
         <div class="progression_bar">
             <span class="progression_dec--beat">beat</span><select name="" id="" v-model="type">
                 <option v-for="type in types" :label="type" :value="type" :key="type"></option>

@@ -2,7 +2,7 @@ import {context, Time, Synth, Transport} from 'tone'
 
 let template =
 `    <div class="module progression" id="progression">
-<h1>Progression</h1>
+<h1>PROGRESSION</h1>
 <div class="progression_bar">
     <span class="progression_dec--beat">beat</span><select name="" id="" v-model="type">
         <option v-for="type in types" :label="type" :value="type" :key="type"></option>
@@ -37,7 +37,6 @@ let loopMap = {
     // time: the real time when the loop is fired
     // single: the time of each loop
     scale: function(synth, chord, time, single) {
-        console.log(Transport.position);
         for(let i = 0; i < chord.length; i ++) {
             synth.triggerAttackRelease(chord[(i % chord.length)], '16n', time + i * Time('16n'));
         }

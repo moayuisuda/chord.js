@@ -16,6 +16,7 @@ import {
     ChordItem
 } from './chordItem'
 import Vue from 'vue/dist/vue.js'
+let count = 0;
 
 let instance = new Vue({
     template,
@@ -40,12 +41,17 @@ let instance = new Vue({
         bpm: {
             handler(val, oldVal) {
                 Transport.bpm.value = val;
+                this.caculateTime();
+                let tile = this.timeline[this.timeline.length - 1];
+                if (tile) {
+                    Transport.loopEnd = this.timeline[this.timeline.length - 1].stop;
+                    Transport.loop = true;
+                } else Transport.loopEnd = false;
             },
             immediate: true
         },
         'timeline.length': {
             handler(val) {
-                console.log(val);
                 let tile = this.timeline[this.timeline.length - 1];
                 if (tile) {
                     Transport.loopEnd = this.timeline[this.timeline.length - 1].stop;
@@ -105,11 +111,13 @@ let instance = new Vue({
                     instance: this
                 })
 
-            console.log(chordItem.amount, chordItem.single)
-
             this.timeline.splice(this.flag + 1, 0, chordItem);
             this.caculateTime();
 
+            console.log(chordItem.flag, count ++);
+
+            // only when focus() is invoked can flag be added, if you call add() very quickly, an  the focus have a 32n delay, so you will see a
+            // bug which the flag is not set on the last ChordItem in the timeline.
             this.timeline[chordItem.flag].focus();
         },
 
@@ -133,7 +141,7 @@ let instance = new Vue({
 
                 item.start = start;
                 item.stop = stop;
-                item.flag = flag++;
+                item.flag = flag ++;
 
                 loop.cancel();
                 loop.start(start);

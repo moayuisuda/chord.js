@@ -21,6 +21,7 @@ h2 {
 .main {
     overflow: hidden;
     padding-left: 100px;
+    background: linear-gradient(145deg, white 60%, var(--lightPink_color) 0%, var(--lightPink_color) 100%);
 }
 
 input {
@@ -28,7 +29,6 @@ input {
 }
 
 .logo {
-    color: var(--main2_color);
     position: fixed;
     right: 50px;
     top: 30px;
@@ -65,6 +65,7 @@ button:active {
 
 .module {
     padding: 10px;
+    padding-right: 300px;
 }
 
 
