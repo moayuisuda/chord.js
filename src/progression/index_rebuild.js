@@ -22,7 +22,7 @@ let instance = new Vue({
     template,
     data: {
         flag: 0,
-        bpm: 70,
+        bpm: 50,
         type: 'scale',
         types: [
             'scale'
@@ -41,23 +41,8 @@ let instance = new Vue({
         bpm: {
             handler(val, oldVal) {
                 Transport.bpm.value = val;
-                this.caculateTime();
-                let tile = this.timeline[this.timeline.length - 1];
-                if (tile) {
-                    Transport.loopEnd = this.timeline[this.timeline.length - 1].stop;
-                    Transport.loop = true;
-                } else Transport.loopEnd = false;
             },
             immediate: true
-        },
-        'timeline.length': {
-            handler(val) {
-                let tile = this.timeline[this.timeline.length - 1];
-                if (tile) {
-                    Transport.loopEnd = this.timeline[this.timeline.length - 1].stop;
-                    Transport.loop = true;
-                } else Transport.loopEnd = false;
-            },
         }
     },
 
@@ -70,7 +55,6 @@ let instance = new Vue({
         start() {
             this.playing = true;
             Transport.stop();
-            this.caculateTime();
             Transport.start();
         },
 
@@ -87,7 +71,8 @@ let instance = new Vue({
                 single,
                 chord
             } = this.input;
-            let chordArr
+            let chordArr;
+
             try {
                 chordArr = getChord(chord, this.initOctive);
             } catch (e) {
@@ -114,8 +99,6 @@ let instance = new Vue({
             this.timeline.splice(this.flag + 1, 0, chordItem);
             this.caculateTime();
 
-            console.log(chordItem.flag, count ++);
-
             // only when focus() is invoked can flag be added, if you call add() very quickly, an  the focus have a 32n delay, so you will see a
             // bug which the flag is not set on the last ChordItem in the timeline.
             this.timeline[chordItem.flag].focus();
@@ -126,8 +109,16 @@ let instance = new Vue({
             this.caculateTime();
         },
 
+        caculateLoop() {
+            let tile = this.timeline[this.timeline.length - 1];
+            if (tile) {
+                Transport.loopEnd = this.timeline[this.timeline.length - 1].stop;
+                Transport.loop = true;
+            } else Transport.loop = false;
+        },
+
         caculateTime() {
-            let timeFlag = 0;
+            let timeFlag = Time(0);
             let flag = 0;
             for (let item of this.timeline) {
                 let {
@@ -143,18 +134,16 @@ let instance = new Vue({
                 item.stop = stop;
                 item.flag = flag ++;
 
-                loop.cancel();
-                loop.start(start);
-                loop.stop(stop);
+                // loop.cancel();
+                loop.start(item.start);
+                loop.stop(item.stop);
 
                 Transport.schedule((time) => {
                     item.setFlag();
-                }, start);
-
-                Transport.schedule((time) => {
-                    item.overFlag();
-                }, stop);
+                }, item.start);
             }
+
+            this.caculateLoop();
         }
     }
 })

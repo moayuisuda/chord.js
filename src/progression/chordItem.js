@@ -26,10 +26,6 @@ class ChordItem {
     setFlag() {
         this.instance.flag = this.flag;
     }
-
-    overFlag() {
-        this.instance.flag ++;
-    }
 }
 
 export {ChordItem}
