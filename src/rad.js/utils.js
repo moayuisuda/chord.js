@@ -29,7 +29,7 @@ function getType(str) {
 
 function getAdd(str) {
     let result = [];
-    let reg = /add(\d{1,2})/g;
+    let reg = /add((#|b)?\d{1,2})/g;
 
     let addItem;
     while (addItem = reg.exec(str)) {
@@ -42,7 +42,7 @@ function getAdd(str) {
 
 function getOmit(str) {
     let result = [];
-    let reg = /omit(\d{1,2})/g;
+    let reg = /omit((#|b)?\d{1,2})/g;
 
     let omitItem;
     while (omitItem = reg.exec(str)) {

@@ -44,7 +44,7 @@ function caculateScale({
     type,
 }, initOctave, signType = '#') {
     let rootInterval = conve.noteToInterval(root),
-        scale = typeToScale[type],
+        scale = conve.typeToScale(type),
         intervalArr = conve.scaleToIntervalArr(scale),
         abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
 

@@ -1,12 +1,9 @@
 import './theme/index.css'
 import './theme/progression.css'
 
-import {
-    initChord
-} from './initChord';
-import {
-    initScaleChords
-} from './initScaleChords'
+import {initChord} from './initChord';
+import {initScale} from './initScale';
+import {initScaleChords} from './initScaleChords'
 import {initProgression} from './initProgression';
 
 // function updateTime() {
@@ -17,5 +14,6 @@ import {initProgression} from './initProgression';
 // updateTime()
 
 initChord();
+initScale();
 initScaleChords();
 initProgression();

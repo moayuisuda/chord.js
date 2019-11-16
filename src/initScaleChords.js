@@ -6,12 +6,14 @@ import {
 function initScaleChords() {
 
     document.querySelector('.scaleChords_btn').addEventListener('click', onScaleChords);
+    let rootEl = document.querySelector('.scaleChords_root');
+    let typeEl = document.querySelector('.scaleChords_type');
+
+    rootEl.value =  'C';
 
     function onScaleChords(e) {
-        let root = document.querySelector('.scaleChords_root').value;
-        let typeSelector = document.querySelector('.scaleChords_type');
-        let index = typeSelector.selectedIndex; // 选中索引
-        let type = typeSelector.options[index].value; // 选中值
+        let root = rootEl.value;
+        let type = typeEl.options[typeEl.selectedIndex].value; // 选中值
         
         let result
         try {

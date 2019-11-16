@@ -1,7 +1,13 @@
-import {context, Time, Synth, Transport} from 'tone'
+import {
+    context,
+    Time,
+    Synth,
+    Part,
+    Transport
+} from 'tone'
 
 let template =
-`    <div class="module progression" id="progression">
+    `    <div class="module progression" id="progression">
 <h1>PROGRESSION</h1>
 <div class="progression_bar">
     <span class="progression_dec--beat">beat</span><select name="" id="" v-model="type">
@@ -36,14 +42,38 @@ let template =
 let loopMap = {
     // time: the real time when the loop is fired
     // single: the time of each loop
-    scale: function(synth, chord, time, single) {
-        for(let i = 0; i < chord.length; i ++) {
-            synth.triggerAttackRelease(chord[(i % chord.length)], '16n', time + i * Time('16n'));
-        }
-    }
+    scale: function (synth, chord, single) {
+        return new Part(function (time, event) {
+            //the events will be given to the callback with the time they occur
+            synth.triggerAttackRelease(event.note, event.dur, time)
+        }, [{
+                time: 0,
+                note: chord[0],
+                dur: '8n'
+            },
+            {
+                time: '0:1:0',
+                note: chord[1],
+                dur: '8n'
+            }, {
+                time: '0:2:0',
+                note: chord[2],
+                dur: '8n'
+            }, {
+                time: '0:3:0',
+                note: chord[3],
+                dur: chord[3] ? '8n' : 0
+            }
+        ])
+    },
+
 }
 
 let synth = new Synth().toMaster();
 
 
-export {template, loopMap, synth}
+export {
+    template,
+    loopMap,
+    synth
+}

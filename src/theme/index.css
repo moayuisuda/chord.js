@@ -68,11 +68,6 @@ button:active {
     padding-right: 300px;
 }
 
-
-.scaleChords .result_item+.result_item {
-    margin-left: 10px;
-}
-
-.chord .result_item+.result_item {
+.result_item+.result_item {
     margin-left: 10px;
 }

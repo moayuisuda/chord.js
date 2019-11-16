@@ -5,6 +5,8 @@ import {
 function initChord() {
     let nameEl = document.querySelector('.chord_name');
     let octaveEl = document.querySelector('.chord_octave');
+
+    nameEl.value = 'Cm7';
     octaveEl.value = 4;
 
     document.querySelector('.chord_btn').addEventListener('click', getChordArr)

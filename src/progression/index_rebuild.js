@@ -84,17 +84,16 @@ let instance = new Vue({
                 throw `[Rad-Club] The parameter "${amount}/${single}" is not valid`
 
             let time = Time(`${single}n`) * amount,
-                loop = new Loop((time) => {
-                    loopMap[this.type](synth, chordArr, time, single);
-                }, `${single}n`),
-                chordItem = new ChordItem({
-                    chord,
-                    loop,
-                    time,
-                    amount,
-                    single,
-                    instance: this
-                })
+            loop = loopMap[this.type](synth, chordArr, single);
+            loop.loop = 3;
+            let chordItem = new ChordItem({
+                chord,
+                loop,
+                time,
+                amount,
+                single,
+                instance: this
+            })
 
             this.timeline.splice(this.flag + 1, 0, chordItem);
             this.caculateTime();
@@ -132,11 +131,11 @@ let instance = new Vue({
 
                 item.start = start;
                 item.stop = stop;
-                item.flag = flag ++;
+                item.flag = flag++;
 
-                // loop.cancel();
+                loop.cancel();
                 loop.start(item.start);
-                loop.stop(item.stop);
+                loop.loopEnd = item.stop;
 
                 Transport.schedule((time) => {
                     item.setFlag();
