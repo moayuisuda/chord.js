@@ -1,3 +1,5 @@
+import { join } from "path";
+
 function createChordItemEl(instance, progression) {
 
     let pannel = createChordPannel(instance);
@@ -24,4 +26,22 @@ function createChordPannel(instance) {
     return el;
 }
 
-export {createChordItemEl}
+function handleFiles(e) {
+    return new Promise((resolve, reject) => {
+        var selectedFile = e.target.files[0]; //获取读取的File对象
+        var name = selectedFile.name; //读取选中文件的文件名
+        var size = selectedFile.size; //读取选中文件的大小
+        var reader = new FileReader(); //这里是核心！！！读取操作就是由它完成的。
+        reader.readAsText(selectedFile); //读取文件的内容
+    
+        reader.onload = function (e) {
+            resolve(e.target.result);
+        };
+    })
+
+}
+
+export {
+    createChordItemEl,
+    handleFiles
+}

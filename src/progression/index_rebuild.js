@@ -16,7 +16,7 @@ import {
     ChordItem
 } from './chordItem'
 import Vue from 'vue/dist/vue.js'
-let count = 0;
+import {handleFiles} from './utils'
 
 let instance = new Vue({
     template,
@@ -34,6 +34,7 @@ let instance = new Vue({
         },
         initOctive: 4,
         timeline: [],
+        json: [],
         playing: false
     },
 
@@ -41,9 +42,10 @@ let instance = new Vue({
         bpm: {
             handler(val, oldVal) {
                 Transport.bpm.value = val;
+                this.caculateTime();
             },
             immediate: true
-        }
+        },
     },
 
     methods: {
@@ -64,6 +66,68 @@ let instance = new Vue({
             Transport.stop();
         },
 
+        exportJson(){
+            let data = [];
+            for(let i of this.timeline) {
+                let {amount, single, chord, type} = i;
+                data.push({
+                    amount,
+                    single,
+                    chord,
+                    type
+                })
+            }
+
+            let json = JSON.stringify(data, undefined, 4)
+            var blob = new Blob([json], {type: 'text/json'}),
+            e = document.createEvent('MouseEvents'),
+            a = document.createElement('a')
+            a.download = 'RAD-PROGRESSION.json'
+            a.href = window.URL.createObjectURL(blob)
+            a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+            e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+            a.dispatchEvent(e)
+        },
+
+        async importJson(e) {
+            let data = await handleFiles(e);
+            let json = JSON.parse(data);
+            for(let i of json) {
+                let {
+                    amount,
+                    single,
+                    chord,
+                    type,
+                } = i;
+                let chordArr;
+    
+                try {
+                    chordArr = getChord(chord, this.initOctive);
+                } catch (e) {
+                    console.log(e);
+                    return;
+                }
+    
+                if (!(amount.match(/^\d$/) && single.match(/^\d$/)))
+                    throw `[Rad-Club] The parameter "${amount}/${single}" is not valid`
+    
+                let time = Time(`${single}n`) * amount,
+                loop = loopMap[type](synth, chordArr, single);
+                loop.loop = 3;
+                let chordItem = new ChordItem({
+                    chord,
+                    loop,
+                    time,
+                    amount,
+                    single,
+                    instance: this
+                })
+    
+                this.timeline.splice(this.flag + 1, 0, chordItem);
+            }
+
+            this.caculateTime();
+        },
         // single is one beat length, and amount is how many times this beat would be triggered.
         add() {
             let {
@@ -71,6 +135,7 @@ let instance = new Vue({
                 single,
                 chord
             } = this.input;
+            let type = this.type;
             let chordArr;
 
             try {
@@ -84,12 +149,13 @@ let instance = new Vue({
                 throw `[Rad-Club] The parameter "${amount}/${single}" is not valid`
 
             let time = Time(`${single}n`) * amount,
-            loop = loopMap[this.type](synth, chordArr, single);
+            loop = loopMap[type](synth, chordArr, single);
             loop.loop = 3;
             let chordItem = new ChordItem({
                 chord,
                 loop,
                 time,
+                type,
                 amount,
                 single,
                 instance: this

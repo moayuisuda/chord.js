@@ -2,20 +2,22 @@
     <div class="module progression" id="progression">
         <h1>PROGRESSION</h1>
         <div class="progression_bar">
-            <span class="progression_dec--beat">beat</span><select name="" id="" v-model="type">
+            <div class="bar_import">↓ Import <input type="file" @input="importJson($event)" /></div>
+            <span class="bar_dec--beat">beat</span><select name="" id="" v-model="type">
                 <option v-for="type in types" :label="type" :value="type" :key="type"></option>
             </select>
-            <span class="progression_dec--beat">bpm</span><input class="progression_input--bpm" v-model="bpm" />
+            <span class="bar_dec--beat">bpm</span><input class="bar_input--bpm" v-model="bpm" />
 
-            <span class="progression_dec--beat">chord</span><input class="progression_input--chord"
+            <span class="bar_dec--beat">chord</span><input class="bar_input--chord"
                 v-model="input.chord" />
-            <span class="progression_dec--beat">beat</span><input class="progression_input--amount" type="number"
+            <span class="bar_dec--beat">beat</span><input class="bar_input--amount" type="number"
                 v-model="input.amount" />
             /
-            <input class="progression_input--single" type="number" v-model="input.single" />
-            <button class="progression_add" @click="add" v-show="playing === false">＋</button><br />
-            <button class="progression_btn" @click="toggle"
+            <input class="bar_input--single" type="number" v-model="input.single" />
+            <button class="bar_add" @click="add" v-show="playing === false">＋</button><br />
+            <button class="bar_btn" @click="toggle"
                 :class="{'button--focus': playing}">{{playing ? "STOP" : "START"}}</button>
+            <button class="bar_export" @click="exportJson">Export↑</button>
         </div>
 
         <div class="progression_input--result">

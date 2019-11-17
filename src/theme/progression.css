@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-.progression_btn {
+.bar_btn {
     width: 80px;
     height: 50px;
     display: flex;
@@ -24,12 +24,16 @@
     margin-left: 20px;
 }
 
-.progression_add {
+.bar_add {
     width: 30px;
     height: 30px;
     margin-left: 10px;
     font-weight: bold;
     border-radius: 40px;
+}
+
+.bar_import input{
+    width: auto;
 }
 
 .progression .result_item {

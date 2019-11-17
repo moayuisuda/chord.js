@@ -3,7 +3,7 @@ import { transcode } from 'buffer';
 
 
 class ChordItem {
-    constructor({chord, loop, time, single, amount, instance, start, stop, flag}) {
+    constructor({chord, loop, time, single, amount, instance, start, stop, flag, type}) {
         this.chord = chord;
         this.loop = loop;
         this.time = time;
@@ -12,7 +12,8 @@ class ChordItem {
         this.instance = instance;
         this.start = start;
         this.stop = stop;
-        this.flag = flag
+        this.flag = flag;
+        this.type = type;
     }
 
     focus() {
