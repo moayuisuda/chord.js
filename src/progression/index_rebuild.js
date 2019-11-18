@@ -40,6 +40,7 @@ let instance = new Vue({
     watch: {
         bpm: {
             handler(val, oldVal) {
+                this.changeWave();
                 Transport.bpm.value = val;
                 this.caculateTime();
             },
@@ -48,6 +49,14 @@ let instance = new Vue({
     },
 
     methods: {
+        changeWave() {
+            console.log('change');
+            let waveOne = document.querySelector('.wave--one');
+            let waveTwo = document.querySelector('.wave--two');
+            waveOne.style.animationDuration = Math.ceil(360 / this.bpm) + 's';
+            waveTwo.style.animationDuration = Math.ceil(360 / this.bpm) + 's';
+        },
+
         toggle() {
             if (this.playing) this.stop();
             else this.start();

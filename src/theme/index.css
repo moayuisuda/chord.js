@@ -18,11 +18,64 @@ h2 {
     display: inline-block;
 }
 
+div {
+    box-sizing: border-box;
+}
+
 .main {
+    position: relative;
     overflow: hidden;
     padding-left: 100px;
-    background: linear-gradient(145deg, white 60%, var(--lightPink_color) 0%, var(--lightPink_color) 100%);
+    /* background: linear-gradient(145deg, white 60%, var(--lightPink_color) 0%, var(--lightPink_color) 100%); */
 }
+
+.background {
+    position: absolute;
+    height: 200vh;
+    width: 100vw;
+    z-index: -2;
+    top: 0;
+    left: 0;
+    background-color: var(--lightPink_color);
+}
+
+.wave--one {
+    position: absolute;
+    top: -40vmax;
+    left: -40vmax;
+    height: 130vmax;
+    width: 130vmax;
+    background-color: var(--white_color);
+    z-index: -1;
+    border-radius: 60vmax;
+    animation: rotate linear infinite;
+    transition: .5s;
+}
+
+.wave--two {
+    position: absolute;
+    opacity: 0.6;
+    top: -38vmax;
+    left: -38vmax;
+    height: 130vmax;
+    width: 130vmax;
+    background-color: var(--white_color);
+    z-index: -1;
+    border-radius: 60vmax;
+    animation: rotate linear infinite;
+    animation-delay: 0.5s;
+    transition: .5s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 input {
     width: 50px;
@@ -41,6 +94,7 @@ input {
 
 .progression {
     height: 100vh;
+    position: relative;
 }
 
 button {

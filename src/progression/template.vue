@@ -2,7 +2,7 @@
     <div class="module progression" id="progression">
         <h1>PROGRESSION</h1>
         <div class="progression_bar">
-            <div class="bar_import">↓ Import <input type="file" @input="importJson($event)" /></div>
+            <input type="file" @input="importJson($event)" class="bar_import" />
             <span class="bar_dec--beat">beat</span><select name="" id="" v-model="type">
                 <option v-for="type in types" :label="type" :value="type" :key="type"></option>
             </select>

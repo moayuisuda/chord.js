@@ -15,6 +15,30 @@
     align-items: center;
 }
 
+.bar_import {
+    color: var(--white_color);
+    position: relative;
+    margin-right: 20px;
+}
+
+.bar_import::after {
+    content: '↓Import';
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--main2_color);
+}
+
+.bar_export {
+    margin-left: 20px;
+    background-color: var(--main2_color);
+}
+
 .bar_btn {
     width: 80px;
     height: 50px;
@@ -30,10 +54,6 @@
     margin-left: 10px;
     font-weight: bold;
     border-radius: 40px;
-}
-
-.bar_import input{
-    width: auto;
 }
 
 .progression .result_item {
