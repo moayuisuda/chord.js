@@ -1,8 +1,7 @@
 import {
     Time,
     Transport,
-    Loop,
-    Ticks,
+    Part
 } from 'tone'
 import {
     template,
@@ -148,13 +147,10 @@ let instance = new Vue({
             if (!(amount.match(/^\d$/) && single.match(/^\d$/)))
                 throw `[Rad-Club] The parameter "${amount}/${single}" is not valid`
 
-            let time = Time(`${single}n`) * amount,
-            loop = loopMap[type](synth, chordArr, single);
-            loop.loop = 3;
+            let loop = loopMap[type](synth, chordArr, single);
             let chordItem = new ChordItem({
                 chord,
                 loop,
-                time,
                 type,
                 amount,
                 single,
@@ -183,25 +179,27 @@ let instance = new Vue({
         },
 
         caculateTime() {
+            console.log('recaculate..');
             let timeFlag = Time(0);
             let flag = 0;
             for (let item of this.timeline) {
                 let {
-                    time,
-                    loop
+                    loop,
+                    amount,
+                    single
                 } = item;
 
                 let start = timeFlag;
-                timeFlag += time;
+                timeFlag += amount * Time(`${single}n`);
                 let stop = timeFlag;
 
                 item.start = start;
                 item.stop = stop;
                 item.flag = flag++;
-
-                loop.cancel();
+                
+                loop.cancel(0);
                 loop.start(item.start);
-                loop.loopEnd = item.stop;
+                loop.loop = amount;
 
                 Transport.schedule((time) => {
                     item.setFlag();

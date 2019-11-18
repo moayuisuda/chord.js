@@ -3,10 +3,9 @@ import { transcode } from 'buffer';
 
 
 class ChordItem {
-    constructor({chord, loop, time, single, amount, instance, start, stop, flag, type}) {
+    constructor({chord, loop, single, amount, instance, start, stop, flag, type}) {
         this.chord = chord;
         this.loop = loop;
-        this.time = time;
         this.single = single;
         this.amount = amount;
         this.instance = instance;
@@ -20,7 +19,7 @@ class ChordItem {
         Transport.position = Time(this.start) - Time('32n');
         if(!this.instance.playing) {
             Transport.start();
-            Transport.stop(context.currentTime + this.time);
+            Transport.stop(context.currentTime + this.amount * Time(`${this.single}n`));
         }
     }
 
