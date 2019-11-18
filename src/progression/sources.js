@@ -66,7 +66,7 @@ let loopMap = {
 
 }
 
-let synth = new PolySynth(4, Synth).toMaster();
+let synth = new Synth().toMaster();
 
 
 export {
