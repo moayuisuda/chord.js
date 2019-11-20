@@ -12,39 +12,45 @@
 body {
     margin: 0;
     color: var(--text_color);
+    font-family: monospace;
 }
 
 h2 {
     display: inline-block;
 }
 
-div {
+* {
     box-sizing: border-box;
 }
 
 .main {
     position: relative;
     overflow: hidden;
+    background-color: var(--lightPink_color);
     /* background: linear-gradient(145deg, white 60%, var(--lightPink_color) 0%, var(--lightPink_color) 100%); */
 }
 
-.content {
+.content {  
+    position: relative;
     width: 1000px;
+    padding: 20px;
     margin-left: calc(50vw - 500px);
 }
 
 .show {
     height: 100vh;
+    padding: 50px;
 }
 
-.background {
-    position: absolute;
-    height: 200vh;
-    width: 100vw;
-    z-index: -2;
-    top: 0;
-    left: 0;
-    background-color: var(--lightPink_color);
+.show_card {
+    box-shadow: 0 0 6px var(--grey_color);
+    padding: 30px;
+    height: 600px;
+}
+
+.show_card:hover {
+    transition: .5s;
+    box-shadow: 0 0 10px var(--grey_color);
 }
 
 .wave--one {
@@ -54,7 +60,6 @@ div {
     height: 130vmax;
     width: 130vmax;
     background-color: var(--white_color);
-    z-index: -1;
     border-radius: 60vmax;
     animation: rotate linear infinite;
     transition: .5s;
@@ -68,7 +73,6 @@ div {
     height: 130vmax;
     width: 130vmax;
     background-color: var(--white_color);
-    z-index: -1;
     border-radius: 60vmax;
     animation: rotate linear infinite;
     animation-delay: 0.5s;
@@ -90,10 +94,30 @@ input {
 }
 
 .logo {
+    color: var(--main_color);
     position: fixed;
-    right: 50px;
-    top: 30px;
-    font-size: 50px;
+    left: 0px;
+    top: 0px;
+}
+
+.logo_text {
+    font-size: 60px;
+    animation: logo infinite;
+    fill: transparent;
+    stroke-width: 1;
+    stroke: var(--main_color);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    animation: logo 2s ease-in-out;
+}
+
+@keyframes logo {
+    0% {
+        stroke-dasharray: 20 20;
+    }
+    100% {
+        stroke-dasharray: 30 0
+    }
 }
 
 .progression {

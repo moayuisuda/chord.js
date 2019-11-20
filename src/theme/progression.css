@@ -11,25 +11,25 @@
 
 .progression_bar {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
 }
 
 .bar_import {
-    width: 70px;
+    width: 80px;
     color: var(--white_color);
     position: relative;
     margin-right: 20px;
 }
 
 .bar_import::after {
+    box-sizing: border-box;
     content: '↓Import';
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100%;
-    width: 100%; */
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     padding: 1px 7px 2px;
