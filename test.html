@@ -6,32 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        /* body {
-            overflow: hidden;
-        } */
+        body {
+            margin: 0;
+        }
+        * {
+            outline: 1px solid red;
+        }
+
         .dd {
-            width: 2000px;
+            width: 200px;
             height: 100px;
             display: inline-block;
             background-color: blue;
         }
-        .dd::after {
+
+        .one {
+            width: 1000px;
+            height: 100px;
             background-color: aqua;
         }
-        .inner {
-            width: 50px;
+
+        .inline {
             display: inline-block;
-            height: 50px;
-            background-color: aqua;
+            width: 100px;
+            height: 100px;
+        }
+
+        .float {
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
         }
     </style>
 </head>
 <body>
     <div class="dd">
-        <div class="inner"></div>
-        <div class="inner"></div>
+        <div class="one"></div>
     </div>
-    <div class="dd"></div>
+    <span>asd</span>
+    <div class="inline float"></div>
 </body>
 <script>
 </script>

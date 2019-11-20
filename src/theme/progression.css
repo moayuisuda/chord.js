@@ -16,6 +16,7 @@
 }
 
 .bar_import {
+    width: 70px;
     color: var(--white_color);
     position: relative;
     margin-right: 20px;
@@ -27,10 +28,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    /* height: 100%;
+    width: 100%; */
     top: 0;
     left: 0;
+    padding: 1px 7px 2px;
     background-color: var(--main2_color);
 }
 
@@ -57,7 +59,7 @@
 }
 
 .progression .result_item {
-    width: 100px;
+    width: 120px;
     height: 30px;
     color: var(--white_color);
     text-align: center;

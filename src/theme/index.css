@@ -25,8 +25,16 @@ div {
 .main {
     position: relative;
     overflow: hidden;
-    padding-left: 100px;
     /* background: linear-gradient(145deg, white 60%, var(--lightPink_color) 0%, var(--lightPink_color) 100%); */
+}
+
+.content {
+    width: 1000px;
+    margin-left: calc(50vw - 500px);
+}
+
+.show {
+    height: 100vh;
 }
 
 .background {
@@ -88,10 +96,6 @@ input {
     font-size: 50px;
 }
 
-.show {
-    height: 100vh;
-}
-
 .progression {
     height: 100vh;
     position: relative;
@@ -119,7 +123,6 @@ button:active {
 
 .module {
     padding: 10px;
-    padding-right: 300px;
 }
 
 .result_item+.result_item {

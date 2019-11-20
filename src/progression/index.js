@@ -15,7 +15,7 @@ import {
     ChordItem
 } from './chordItem'
 import Vue from 'vue/dist/vue.js'
-import {handleFiles} from './utils'
+import {handleFiles, antiShake} from './utils'
 
 let instance = new Vue({
     template,
@@ -40,9 +40,11 @@ let instance = new Vue({
     watch: {
         bpm: {
             handler(val, oldVal) {
-                this.changeWave();
-                Transport.bpm.value = val;
-                this.caculateTime();
+                antiShake(() => {
+                    this.changeWave();
+                    Transport.bpm.value = val;
+                    this.caculateTime();
+                })
             },
             immediate: true
         },
@@ -86,8 +88,9 @@ let instance = new Vue({
                 })
             }
 
-            let json = JSON.stringify(data, undefined, 4)
-            var blob = new Blob([json], {type: 'text/json'}),
+            let
+            json = JSON.stringify(data, undefined, 4),
+            blob = new Blob([json], {type: 'text/json'}),
             e = document.createEvent('MouseEvents'),
             a = document.createElement('a')
             a.download = 'RAD-PROGRESSION.json'
@@ -188,7 +191,8 @@ let instance = new Vue({
         },
 
         caculateTime() {
-            console.log('recaculate..');
+            Transport.cancel();
+            
             let timeFlag = Time(0);
             let flag = 0;
             for (let item of this.timeline) {
@@ -206,7 +210,6 @@ let instance = new Vue({
                 item.stop = stop;
                 item.flag = flag++;
                 
-                loop.cancel(0);
                 loop.start(item.start);
                 loop.loop = amount;
 

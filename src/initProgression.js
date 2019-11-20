@@ -1,6 +1,6 @@
 import {
     instance
-} from './progression/index_rebuild'
+} from './progression'
 
 function initProgression() {
     instance.$mount('#progression');

@@ -5,6 +5,7 @@ import {initChord} from './initChord';
 import {initScale} from './initScale';
 import {initScaleChords} from './initScaleChords'
 import {initProgression} from './initProgression';
+import {isPC} from './isPC'
 
 // function updateTime() {
 //     requestAnimationFrame(updateTime);
@@ -12,6 +13,9 @@ import {initProgression} from './initProgression';
 //     document.querySelector('#time').textContent = context.currentTime.toFixed(2);
 // }
 // updateTime()
+
+let flag = isPC();
+if(!flag) alert('Use me with PC to get more fun!');
 
 initChord();
 initScale();
