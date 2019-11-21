@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,16 @@
         body {
             margin: 0;
         }
+
         * {
             outline: 1px solid red;
+            background-color: aqua;
         }
 
         .dd {
             width: 200px;
             height: 100px;
             display: inline-block;
-            background-color: blue;
         }
 
         .one {
@@ -32,20 +34,44 @@
             height: 100px;
         }
 
-        .float {
+        .float::after {
+            content: '|';
+            display: inline-block;
             width: 100px;
             height: 100px;
-            background-color: bisque;
+        }
+
+        input::after {
+            content: '|';
+            display: inline-block;
+            width: 100px;
+            height: 100px;
         }
     </style>
 </head>
+
 <body>
-    <div class="dd">
+    <!-- <div class="dd">
         <div class="one"></div>
     </div>
+    <input type="file" class="bar_import" />
     <span>asd</span>
-    <div class="inline float"></div>
+    <div class="inline float"></div> -->
+
+    <div class="outter" style="position: relative;">
+        <div class="innerOne" style="width: 100px; height: 100px; background-color: bisque; position: relative; z-index: -1;">
+            <div class="innerTwo"
+                style="width: 200px; height: 200px; background-color: red; position: relative;"></div>
+        </div>
+    </div>
+    
+    <div class="out">
+        <div class="in" style="height: 200px;">
+            <div class="inner" style="height: 400px;"></div>
+        </div>
+    </div>
 </body>
 <script>
 </script>
+
 </html>

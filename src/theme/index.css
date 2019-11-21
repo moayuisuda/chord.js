@@ -101,7 +101,7 @@ input {
 }
 
 .logo_text {
-    font-size: 60px;
+    font-size: 50px;
     animation: logo infinite;
     fill: transparent;
     stroke-width: 1;
