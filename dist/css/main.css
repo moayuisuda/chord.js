@@ -1,0 +1,243 @@
+:root {
+    --main_color: #abdcea;
+    --main2_color: #1a73af;
+    --grey_color: #aaaaaa;
+    --focus_color: #fe92a1;
+    --lightPink_color: #fee0e2;
+    --text_color: #010204;
+    --yellow_color: #fff3e3;
+    --white_color: #ffffff
+}
+
+body {
+    margin: 0;
+    color: var(--text_color);
+    font-family: monospace;
+}
+
+h2 {
+    display: inline-block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.main {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--lightPink_color);
+    /* background: linear-gradient(145deg, white 60%, var(--lightPink_color) 0%, var(--lightPink_color) 100%); */
+}
+
+.content {  
+    position: relative;
+    width: 1000px;
+    padding: 20px;
+    margin-left: calc(50vw - 500px);
+}
+
+.show {
+    height: 100vh;
+    padding: 50px;
+}
+
+.show_card {
+    box-shadow: 0 0 6px var(--grey_color);
+    padding: 30px;
+    height: 600px;
+}
+
+.show_card:hover {
+    transition: .5s;
+    box-shadow: 0 0 10px var(--grey_color);
+}
+
+.wave--one {
+    position: absolute;
+    top: -40vmax;
+    left: -40vmax;
+    height: 130vmax;
+    width: 130vmax;
+    background-color: var(--white_color);
+    border-radius: 60vmax;
+    animation: rotate linear infinite;
+    transition: .5s;
+}
+
+.wave--two {
+    position: absolute;
+    opacity: 0.6;
+    top: -38vmax;
+    left: -38vmax;
+    height: 130vmax;
+    width: 130vmax;
+    background-color: var(--white_color);
+    border-radius: 60vmax;
+    animation: rotate linear infinite;
+    animation-delay: 0.5s;
+    transition: .5s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+input {
+    width: 50px;
+}
+
+.logo {
+    color: var(--main_color);
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+.logo_text {
+    font-size: 60px;
+    animation: logo infinite;
+    fill: transparent;
+    stroke-width: 1;
+    stroke: var(--main_color);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    animation: logo 2s ease-in-out;
+}
+
+@keyframes logo {
+    0% {
+        stroke-dasharray: 20 20;
+    }
+    100% {
+        stroke-dasharray: 30 0
+    }
+}
+
+.progression {
+    height: 100vh;
+    position: relative;
+}
+
+button {
+    color: var(--white_color);
+    background-color: var(--main_color);
+    border: none;
+    cursor: pointer;
+}
+
+button+button {
+    margin-left: 5px;
+}
+
+.button--focus {
+    background-color: var(--focus_color);
+    color: var(--white_color);
+}
+
+button:active {
+    background-color: var(--focus_color);
+}
+
+.module {
+    padding: 10px;
+}
+
+.result_item+.result_item {
+    margin-left: 10px;
+}:root {
+    --main_color: #abdcea;
+    --main2_color: #1a73af;
+    --grey_color: #aaaaaa;
+    --focus_color: #fe92a1;
+    --lightPink_color: #fee0e2;
+    --text_color: #010204;
+    --yellow_color: #fff3e3;
+    --white_color: #ffffff
+}
+
+.progression_bar {
+    display: flex;
+    align-items: center;
+}
+
+.bar_import {
+    width: 80px;
+    color: var(--white_color);
+    position: relative;
+    margin-right: 20px;
+}
+
+.bar_import::after {
+    box-sizing: border-box;
+    content: '↓Import';
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 1px 7px 2px;
+    background-color: var(--main2_color);
+}
+
+.bar_export {
+    margin-left: 20px;
+    background-color: var(--main2_color);
+}
+
+.bar_btn {
+    width: 80px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.bar_add {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    font-weight: bold;
+    border-radius: 40px;
+}
+
+.progression .result_item {
+    width: 120px;
+    height: 30px;
+    color: var(--white_color);
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 2px 2px 6px var(--grey_color);
+    background-color: var(--main_color);
+    transition: all .2s;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.progression .result_item--focus {
+    background-color: var(--focus_color);
+}
+
+.progression .result_item--wrapper {
+    display: inline-block;
+}
+
+.progression .item_pannel {
+    display: inline-block;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+/*# sourceMappingURL=main.css.map*/

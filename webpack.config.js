@@ -1,5 +1,6 @@
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     devtool: 'source-map',
@@ -16,16 +17,17 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            use: [{
-                    loader: "style-loader"
-                },
-                {
-                    loader: "css-loader"
-                },
-            ]
+            use: [
+                MiniCssExtractPlugin.loader,
+                "css-loader"
+              ]
         }]
     },
     plugins: [
-        new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].css",
+            chunkFilename: "css/[id].css"
+          })
     ]
 }
