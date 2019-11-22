@@ -29,7 +29,7 @@ function getType(str) {
 
 function getAdd(str) {
     let result = [];
-    let reg = /add(\d{1,2})/g;
+    let reg = /add((#|b)?\d{1,2})/g;
 
     let addItem;
     while (addItem = reg.exec(str)) {
@@ -42,7 +42,7 @@ function getAdd(str) {
 
 function getOmit(str) {
     let result = [];
-    let reg = /omit(\d{1,2})/g;
+    let reg = /omit((#|b)?\d{1,2})/g;
 
     let omitItem;
     while (omitItem = reg.exec(str)) {
@@ -109,7 +109,15 @@ function copy(obj) {
     return result;
 }
 
+function mapStringfy(map) {
+    
+    let stringMap = {};
+    for(let [key, value] of map.entries()) {
+        stringMap[value.join('-')] = key;
+    }
 
+    return stringMap;
+}
 
 export {
     getRoot,
@@ -118,5 +126,6 @@ export {
     strToOptions,
     replaceRoot,
     getSignIndex,
-    copy
+    copy,
+    mapStringfy
 }
