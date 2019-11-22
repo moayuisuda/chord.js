@@ -1,5 +1,4 @@
 import {Transport, context, Time} from 'tone'
-import { transcode } from 'buffer';
 
 
 class ChordItem {

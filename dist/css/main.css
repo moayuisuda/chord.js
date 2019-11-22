@@ -33,7 +33,6 @@ h2 {
 .content {  
     position: relative;
     width: 1000px;
-    padding: 20px;
     margin-left: calc(50vw - 500px);
 }
 
@@ -151,7 +150,8 @@ button:active {
 
 .result_item+.result_item {
     margin-left: 10px;
-}:root {
+}
+:root {
     --main_color: #abdcea;
     --main2_color: #1a73af;
     --grey_color: #aaaaaa;
@@ -160,6 +160,12 @@ button:active {
     --text_color: #010204;
     --yellow_color: #fff3e3;
     --white_color: #ffffff
+}
+
+#progression {
+    transform: translate(20px, 0);
+    opacity: 0;
+    transition: .5s;
 }
 
 .progression_bar {
@@ -239,5 +245,6 @@ button:active {
     line-height: 30px;
     cursor: pointer;
 }
+
 
 /*# sourceMappingURL=main.css.map*/

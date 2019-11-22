@@ -1,7 +1,6 @@
 import {
     Time,
     Transport,
-    Part
 } from 'tone'
 import {
     template,
@@ -21,7 +20,7 @@ let instance = new Vue({
     template,
     data: {
         flag: 0,
-        bpm: 50,
+        bpm: 70,
         type: 'scale',
         types: [
             'scale'
@@ -29,7 +28,7 @@ let instance = new Vue({
         input: {
             single: '4',
             amount: '4',
-            chord: 'C'
+            chord: 'CM7'
         },
         initOctive: 4,
         timeline: [],

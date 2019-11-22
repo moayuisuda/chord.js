@@ -9,7 +9,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'index.js'
+        filename: 'index.js',
+        chunkFilename: 'chunks/[name].min.js'
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist')
