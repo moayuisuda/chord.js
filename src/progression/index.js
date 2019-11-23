@@ -109,43 +109,12 @@ let instance = new Vue({
                     chord,
                     type,
                 } = i;
-                let chordArr;
-    
-                try {
-                    chordArr = getChord(chord, this.initOctive);
-                } catch (e) {
-                    console.log(e);
-                    return;
-                }
-    
-                if (!(amount.match(/^\d$/) && single.match(/^\d$/)))
-                    throw `[Rad-Club] The parameter "${amount}/${single}" is not valid`
-    
-                let time = Time(`${single}n`) * amount,
-                loop = loopMap[type](synth, chordArr, single);
-                loop.loop = 3;
-                let chordItem = new ChordItem({
-                    chord,
-                    loop,
-                    time,
-                    amount,
-                    single,
-                    instance: this
-                })
-    
-                this.timeline.splice(this.flag + 1, 0, chordItem);
-            }
 
-            this.caculateTime();
+                this.addItem({amount, singlem, chord, type})
+            }
         },
-        // single is one beat length, and amount is how many times this beat would be triggered.
-        add() {
-            let {
-                amount,
-                single,
-                chord
-            } = this.input;
-            let type = this.type;
+
+        addItem({amount, single, chord, type}) {
             let chordArr;
 
             try {
@@ -174,6 +143,17 @@ let instance = new Vue({
             // only when focus() is invoked can flag be added, if you call add() very quickly, an  the focus have a 32n delay, so you will see a
             // bug which the flag is not set on the last ChordItem in the timeline.
             this.timeline[chordItem.flag].focus();
+        },
+
+        add() {
+            let {
+                amount,
+                single,
+                chord
+            } = this.input;
+            let type = this.type;
+
+            addItem({amount, single, chord, type});
         },
 
         remove(instance) {
