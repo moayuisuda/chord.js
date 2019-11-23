@@ -110,11 +110,12 @@ let instance = new Vue({
                     type,
                 } = i;
 
-                this.addItem({amount, singlem, chord, type})
+                this.addItem({amount, single, chord, type})
             }
         },
 
         addItem({amount, single, chord, type}) {
+            debugger
             let chordArr;
 
             try {
@@ -140,9 +141,8 @@ let instance = new Vue({
             this.timeline.splice(this.flag + 1, 0, chordItem);
             this.caculateTime();
 
-            // only when focus() is invoked can flag be added, if you call add() very quickly, an  the focus have a 32n delay, so you will see a
-            // bug which the flag is not set on the last ChordItem in the timeline.
             this.timeline[chordItem.flag].focus();
+            console.log('flag', chordItem.flag);
         },
 
         add() {
