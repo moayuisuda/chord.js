@@ -1,5 +1,6 @@
 import * as utils from './utils';
 import * as conve from './converters'
+import { chord } from '.';
 
 function caculateChord({
     root,
@@ -24,8 +25,8 @@ function caculateChord({
 
     for (let i = 0; i < omit.length; i++) {
         for (let j = 0; j < intervalArr.length; j++) {
-            if (omit[i] == intervalArr[j]);
-            intervalArr.splice(i, 1);
+            if (omit[i] == intervalArr[j])
+                intervalArr.splice(i, 1);
         }
     }
 
@@ -41,9 +42,9 @@ function caculateChord({
 function caculateScale({
     root,
     type,
-}, initOctave, signType = '#') {
+}, initOctave = 4, signType = '#') {
     let rootInterval = conve.noteToInterval(root),
-        scale = typeToScale[type],
+        scale = conve.typeToScale(type),
         intervalArr = conve.scaleToIntervalArr(scale),
         abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
 
@@ -55,7 +56,7 @@ function caculateScale({
 function caculateScaleChords({
     root,
     type
-}, initOctave, signType = '#') {
+}, signType = '#') {
     let
         chordsArr = [],
         extendIntervalArr = [],
@@ -66,16 +67,14 @@ function caculateScaleChords({
 
     // get the intervalArr with three more notes in a scale
     extendIntervalArr = extendIntervalArr.concat(abIntervalArr);
-    for (let i = 1; i < 5; i++) {
+
+    let length = 5;
+    for (let i = 1; i < length; i++) {
         extendIntervalArr.push(abIntervalArr[i] + 12);
     }
 
-    let notes = initOctave ?
-        conve.intervalArrToNotesO(extendIntervalArr, initOctave, signType) :
-        conve.intervalArrToNotes(extendIntervalArr, initOctave);
-
-    for (let i = 0; i < abIntervalArr.length; i++) {
-        chordsArr.push([notes[i], notes[i + 2], notes[i + 4]]);
+    for (let i = 0; i < abIntervalArr.length - 1; i++) {
+        chordsArr.push(conve.intervalArrToChord([extendIntervalArr[i], extendIntervalArr[i + 2], extendIntervalArr[i + 4]], signType));
     }
 
     return chordsArr;

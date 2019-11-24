@@ -82,6 +82,18 @@ function scaleToIntervalArr(scale) {
     return result;
 }
 
+function intervalArrToChord([root, third, fifth], signType) {
+    let key,
+        signIndex = utils.getSignIndex(signType);
+    key = [(third - root), (fifth - root)].join('-');
+    let map = utils.mapStringfy(typeMap);
+    let type = map[key];
+    while(root >= 12) {
+        root -= 12;
+    }
+    return (intervalToNote(root)[signIndex] + type);
+}
+
 
 
 // map getters
@@ -120,5 +132,6 @@ export {
     intervalArrToNotesO,
     scaleToIntervalArr,
     noteToInterval,
-    degreeToInterval
+    degreeToInterval,
+    intervalArrToChord
 };
