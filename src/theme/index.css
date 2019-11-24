@@ -51,6 +51,7 @@ h2 {
 .show_card {
     box-shadow: 0 0 6px var(--grey_color);
     padding: 85px;
+    background: linear-gradient(135deg, var(--main2_color) 10%, var(--white_color) 10%);
     /* height: 600px; */
 }
 

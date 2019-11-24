@@ -3,7 +3,7 @@
         <h1>PROGRESSION</h1>
         <div class="progression_bar">
             <input type="file" @input="importJson($event)" class="bar_import" />
-            <span class="bar_dec--beat">beat</span><select name="" id="" v-model="type">
+            <span class="bar_dec--beat">rhythm</span><select name="" id="" v-model="type">
                 <option v-for="type in types" :label="type" :value="type" :key="type"></option>
             </select>
             <span class="bar_dec--beat">bpm</span><input class="bar_input--bpm" v-model="bpm" />

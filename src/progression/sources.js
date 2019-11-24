@@ -2,6 +2,9 @@ import {
     Time,
     Synth,
     Part,
+    JCReverb,
+    FeedbackDelay,
+    DuoSynth
 } from 'tone'
 
 let template =
@@ -9,7 +12,7 @@ let template =
     <h1>PROGRESSION</h1>
     <div class="progression_bar">
         <input type="file" @input="importJson($event)" class="bar_import" />
-        <span class="bar_dec--beat">beat</span><select name="" id="" v-model="type">
+        <span class="bar_dec--beat">rhythm</span><select name="" id="" v-model="type">
             <option v-for="type in types" :label="type" :value="type" :key="type"></option>
         </select>
         <span class="bar_dec--beat">bpm</span><input class="bar_input--bpm" v-model="bpm" />
@@ -44,30 +47,27 @@ let loopMap = {
     // single: the time of each loop
     scale: function (synth, chord, single) {
         return new Part(function (time, event) {
-            //the events will be given to the callback with the time they occur
             for (let i = 0; i < chord.length; i++) {
                 synth.triggerAttackRelease(chord[i % chord.length], '16n', time + i * Time('16n'));
             }
         }, [{
-                time: 0
+            time: 0
+        }])
+    },
+
+    quick: function (synth, chord, single) {
+        return new Part(function (time, event) {
+            for (let i = 0; i < chord.length; i++) {
+                synth.triggerAttackRelease(chord[i % chord.length], '8n', time + i * Time('32n'));
             }
-        ])
+        }, [{
+            time: 0
+        }])
     },
 
 }
 
-let synth = new Synth({
-    oscillator: {
-        type: 'sine'
-    },
-    envelope: {
-        attack: 0.005,
-        decay: 0.1,
-        sustain: 0.3,
-        release: 1
-    }
-}).toMaster();
-
+var synth = new Synth({oscillator: {type: 'sine'}}).toMaster();
 
 export {
     template,

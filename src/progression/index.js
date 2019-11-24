@@ -26,7 +26,8 @@ let instance = new Vue({
         bpm: 70,
         type: 'scale',
         types: [
-            'scale'
+            'scale',
+            'quick'
         ],
         input: {
             single: '4',
@@ -153,7 +154,7 @@ let instance = new Vue({
             let json = JSON.parse(data);
 
             for (let i of json) {
-                let loop = loopMap[i.type](synth, getChord(i.chord, this.initOctive), single);
+                let loop = loopMap[i.type](synth, getChord(i.chord, this.initOctive), i.single);
                 let chordItem = new ChordItem(Object.assign(i, {
                     loop,
                     instance: this
