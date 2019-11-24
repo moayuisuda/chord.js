@@ -1,6 +1,6 @@
 # rad.js
 
-## :bowtie:Get chord/scale/scaleChords you want.
+## :tophat: Get chord/scale/scaleChords you want.
 ### More info in https://moayuisuda.github.io/rad.js/
 
 ```js
