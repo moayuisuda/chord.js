@@ -36,6 +36,13 @@ h2 {
     margin-left: calc(50vw - 500px);
 }
 
+.radImg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 500px;
+}
+
 .show {
     height: 100vh;
     padding: 50px;
@@ -43,8 +50,8 @@ h2 {
 
 .show_card {
     box-shadow: 0 0 6px var(--grey_color);
-    padding: 30px;
-    height: 600px;
+    padding: 85px;
+    /* height: 600px; */
 }
 
 .show_card:hover {
@@ -100,7 +107,7 @@ input {
 }
 
 .logo_text {
-    font-size: 60px;
+    font-size: 50px;
     animation: logo infinite;
     fill: transparent;
     stroke-width: 1;
@@ -123,6 +130,7 @@ input {
     height: 100vh;
     position: relative;
 }
+
 
 button {
     color: var(--white_color);
