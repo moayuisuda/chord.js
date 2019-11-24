@@ -25,8 +25,8 @@ function caculateChord({
 
     for (let i = 0; i < omit.length; i++) {
         for (let j = 0; j < intervalArr.length; j++) {
-            if (omit[i] == intervalArr[j])
-                intervalArr.splice(i, 1);
+            if (conve.degreeToInterval(omit[i]) == intervalArr[j])
+                intervalArr.splice(j, 1);
         }
     }
 
