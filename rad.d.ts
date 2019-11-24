@@ -15,8 +15,8 @@ interface options {
 }
 
 
-function chord(options: options, initOctave?: string, signType?: string): notesArr
+declare function chord(options: options, initOctave?: string, signType?: string): notesArr
 
-function scale(options: options, initOctave?: string, signType?: string): notesArr
+declare function scale(options: options, initOctave?: string, signType?: string): notesArr
 
-function scaleChords(options: options, initOctave?: string, signType?: string): notesArr[]
+declare function scaleChords(options: options, signType?: string): notesArr[]
