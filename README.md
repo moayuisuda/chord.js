@@ -5,7 +5,7 @@
 ```js
 import {chord, scale, scaleChords} from 'rad.js'
 
-chord('Cm7add11omit5');
+chord('Cm7add11omit5'); //
 scale({root: 'C', type: 'ionian'});
 scaleChords({root: 'C', type: 'ionian'});
 ```
