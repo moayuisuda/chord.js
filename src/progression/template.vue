@@ -1,5 +1,5 @@
 <template>
-    <div class="module progression" id="progression">
+    <div class="module progression" id="progression" isReplace="true">
         <h1>PROGRESSION</h1>
         <div class="progression_bar">
             <input type="file" @input="importJson($event)" class="bar_import" />

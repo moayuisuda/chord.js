@@ -1,7 +1,6 @@
 import {
     Time,
     Transport,
-    Part
 } from 'tone'
 import {
     template,
@@ -15,13 +14,16 @@ import {
     ChordItem
 } from './chordItem'
 import Vue from 'vue/dist/vue.js'
-import {handleFiles, antiShake} from './utils'
+import {
+    handleFiles,
+    antiShake
+} from './utils'
 
 let instance = new Vue({
     template,
     data: {
         flag: 0,
-        bpm: 50,
+        bpm: 70,
         type: 'scale',
         types: [
             'scale'
@@ -29,7 +31,7 @@ let instance = new Vue({
         input: {
             single: '4',
             amount: '4',
-            chord: 'C'
+            chord: 'CM7'
         },
         initOctive: 4,
         timeline: [],
@@ -50,9 +52,47 @@ let instance = new Vue({
         },
     },
 
+    created() {
+        let initChords = [{
+                "amount": "4",
+                "single": "4",
+                "chord": "FM7",
+                "type": "scale"
+            },
+            {
+                "amount": "4",
+                "single": "4",
+                "chord": "Em7",
+                "type": "scale"
+            },
+            {
+                "amount": "4",
+                "single": "4",
+                "chord": "Dm7",
+                "type": "scale"
+            },
+            {
+                "amount": "4",
+                "single": "4",
+                "chord": "CM7",
+                "type": "scale"
+            }
+        ]
+
+        for (let i of initChords) {
+            let loop = loopMap[i.type](synth, getChord(i.chord, this.initOctive), i.single);
+            let chordItem = new ChordItem(Object.assign(i, {
+                loop,
+                instance: this
+            }));
+            this.timeline.push(chordItem);
+        }
+
+        this.caculateTime();
+    },
+
     methods: {
         changeWave() {
-            console.log('change');
             let waveOne = document.querySelector('.wave--one');
             let waveTwo = document.querySelector('.wave--two');
             waveOne.style.animationDuration = Math.ceil(360 / this.bpm) + 's';
@@ -76,10 +116,16 @@ let instance = new Vue({
             Transport.stop();
         },
 
-        exportJson(){
+        exportJson() {
             let data = [];
-            for(let i of this.timeline) {
-                let {amount, single, chord, type} = i;
+            for (let i of this.timeline) {
+                let {
+                    amount,
+                    single,
+                    chord,
+                    type
+                } = i;
+
                 data.push({
                     amount,
                     single,
@@ -89,10 +135,12 @@ let instance = new Vue({
             }
 
             let
-            json = JSON.stringify(data, undefined, 4),
-            blob = new Blob([json], {type: 'text/json'}),
-            e = document.createEvent('MouseEvents'),
-            a = document.createElement('a')
+                json = JSON.stringify(data, undefined, 4),
+                blob = new Blob([json], {
+                    type: 'text/json'
+                }),
+                e = document.createEvent('MouseEvents'),
+                a = document.createElement('a')
             a.download = 'RAD-PROGRESSION.json'
             a.href = window.URL.createObjectURL(blob)
             a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
@@ -103,50 +151,25 @@ let instance = new Vue({
         async importJson(e) {
             let data = await handleFiles(e);
             let json = JSON.parse(data);
-            for(let i of json) {
-                let {
-                    amount,
-                    single,
-                    chord,
-                    type,
-                } = i;
-                let chordArr;
-    
-                try {
-                    chordArr = getChord(chord, this.initOctive);
-                } catch (e) {
-                    console.log(e);
-                    return;
-                }
-    
-                if (!(amount.match(/^\d$/) && single.match(/^\d$/)))
-                    throw `[Rad-Club] The parameter "${amount}/${single}" is not valid`
-    
-                let time = Time(`${single}n`) * amount,
-                loop = loopMap[type](synth, chordArr, single);
-                loop.loop = 3;
-                let chordItem = new ChordItem({
-                    chord,
+
+            for (let i of json) {
+                let loop = loopMap[i.type](synth, getChord(i.chord, this.initOctive), single);
+                let chordItem = new ChordItem(Object.assign(i, {
                     loop,
-                    time,
-                    amount,
-                    single,
                     instance: this
-                })
-    
-                this.timeline.splice(this.flag + 1, 0, chordItem);
+                }));
+                this.timeline.push(chordItem);
             }
 
             this.caculateTime();
         },
-        // single is one beat length, and amount is how many times this beat would be triggered.
-        add() {
-            let {
-                amount,
-                single,
-                chord
-            } = this.input;
-            let type = this.type;
+
+        addItem({
+            amount,
+            single,
+            chord,
+            type
+        }) {
             let chordArr;
 
             try {
@@ -172,9 +195,23 @@ let instance = new Vue({
             this.timeline.splice(this.flag + 1, 0, chordItem);
             this.caculateTime();
 
-            // only when focus() is invoked can flag be added, if you call add() very quickly, an  the focus have a 32n delay, so you will see a
-            // bug which the flag is not set on the last ChordItem in the timeline.
             this.timeline[chordItem.flag].focus();
+        },
+
+        add() {
+            let {
+                amount,
+                single,
+                chord
+            } = this.input;
+            let type = this.type;
+
+            this.addItem({
+                amount,
+                single,
+                chord,
+                type
+            });
         },
 
         remove(instance) {
@@ -192,7 +229,7 @@ let instance = new Vue({
 
         caculateTime() {
             Transport.cancel();
-            
+
             let timeFlag = Time(0);
             let flag = 0;
             for (let item of this.timeline) {
@@ -209,9 +246,11 @@ let instance = new Vue({
                 item.start = start;
                 item.stop = stop;
                 item.flag = flag++;
-                
+
                 loop.start(item.start);
-                loop.loop = amount;
+
+                loop.loop = Number(amount);
+                loop.loopEnd = `${single}n`;
 
                 Transport.schedule((time) => {
                     item.setFlag();

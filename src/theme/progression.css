@@ -9,6 +9,12 @@
     --white_color: #ffffff
 }
 
+#progression {
+    transform: translate(20px, 0);
+    opacity: 0;
+    transition: .5s;
+}
+
 .progression_bar {
     display: flex;
     align-items: center;

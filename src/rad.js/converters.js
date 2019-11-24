@@ -83,13 +83,11 @@ function scaleToIntervalArr(scale) {
 }
 
 function intervalArrToChord([root, third, fifth], signType) {
-    // debugger
     let key,
         signIndex = utils.getSignIndex(signType);
     key = [(third - root), (fifth - root)].join('-');
     let map = utils.mapStringfy(typeMap);
     let type = map[key];
-    console.log(root, intervalToNote(root), key)
     while(root >= 12) {
         root -= 12;
     }

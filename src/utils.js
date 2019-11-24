@@ -1,3 +1,10 @@
+function wave() {
+    let waveOne = document.querySelector('.wave--one');
+    let waveTwo = document.querySelector('.wave--two');
+    waveOne.style.animationDuration = Math.ceil(360 / 70) + 's';
+    waveTwo.style.animationDuration = Math.ceil(360 / 70) + 's';
+}
+
 function isPC() {
     let userAgentInfo = navigator.userAgent;
     let Agents = ["Android", "iPhone",
@@ -13,5 +20,4 @@ function isPC() {
     return flag;
 }
 
-
-export {isPC}
+export {wave, isPC}

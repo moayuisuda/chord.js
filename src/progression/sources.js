@@ -1,14 +1,11 @@
 import {
-    context,
     Time,
     Synth,
     Part,
-    PolySynth,
-    Transport
 } from 'tone'
 
 let template =
-    `    <div class="module progression" id="progression">
+    `    <div class="module progression" id="progression" isReplace="true">
     <h1>PROGRESSION</h1>
     <div class="progression_bar">
         <input type="file" @input="importJson($event)" class="bar_import" />
@@ -48,25 +45,28 @@ let loopMap = {
     scale: function (synth, chord, single) {
         return new Part(function (time, event) {
             //the events will be given to the callback with the time they occur
-            for(let i = 0; i < chord.length; i ++) {
+            for (let i = 0; i < chord.length; i++) {
                 synth.triggerAttackRelease(chord[i % chord.length], '16n', time + i * Time('16n'));
             }
         }, [{
-                time: 0,
-            },
-            {
-                time: '0:1:0',
-            }, {
-                time: '0:2:0',
-            }, {
-                time: '0:3:0',
+                time: 0
             }
         ])
     },
 
 }
 
-let synth = new Synth().toMaster();
+let synth = new Synth({
+    oscillator: {
+        type: 'sine'
+    },
+    envelope: {
+        attack: 0.005,
+        decay: 0.1,
+        sustain: 0.3,
+        release: 1
+    }
+}).toMaster();
 
 
 export {

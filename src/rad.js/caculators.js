@@ -42,7 +42,7 @@ function caculateChord({
 function caculateScale({
     root,
     type,
-}, initOctave, signType = '#') {
+}, initOctave = 4, signType = '#') {
     let rootInterval = conve.noteToInterval(root),
         scale = conve.typeToScale(type),
         intervalArr = conve.scaleToIntervalArr(scale),

@@ -5,19 +5,22 @@ import {
 function initChord() {
     let nameEl = document.querySelector('.chord_name');
     let octaveEl = document.querySelector('.chord_octave');
+    let signTypeEl = document.querySelector('.chord_signType');
 
     nameEl.value = 'Cm7';
     octaveEl.value = 4;
+    signTypeEl.value = '#'
 
     document.querySelector('.chord_btn').addEventListener('click', getChordArr)
 
     function getChordArr(e) {
         let name = nameEl.value;
         let octave = octaveEl.value;
+        let signType = signTypeEl.value;
 
         let result
         try {
-            result = chord(name, octave);
+            result = chord(name, octave, signType);
         } catch (e) {
             console.log(e);
             return;
