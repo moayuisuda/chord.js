@@ -255,5 +255,54 @@ button:active {
     cursor: pointer;
 }
 
+:root {
+    --main_color: #abdcea;
+    --main2_color: #1a73af;
+    --grey_color: #aaaaaa;
+    --focus_color: #fe92a1;
+    --lightPink_color: #fee0e2;
+    --text_color: #010204;
+    --yellow_color: #fff3e3;
+    --white_color: #ffffff
+}
+
+@media screen and (max-width: 1000px) {
+    .logo {
+        display: none;
+    }
+
+    .content {
+        width: 100%;
+        margin: 0;
+    }
+
+    .radImg {
+        right: -100px;
+    }
+
+    .show {
+        padding: 0;
+    }
+
+    .show_card {
+        padding: 40px;
+    }
+
+    .show_card::before {
+        margin-top:40px;
+        margin-bottom: 5vh;
+        text-align: center;
+        color: var(--main_color);
+        display: block;
+        content: '- RAD -';
+        font-size: 50px;
+    }
+
+    .progression_bar {
+        flex-wrap: wrap;
+        align-content: space-around;
+        height: 120px;
+    }
+}
 
 /*# sourceMappingURL=main.css.map*/
