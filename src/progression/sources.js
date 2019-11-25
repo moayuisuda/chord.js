@@ -1,10 +1,7 @@
 import {
     Time,
     Synth,
-    Part,
-    JCReverb,
-    FeedbackDelay,
-    DuoSynth
+    Part
 } from 'tone'
 
 let template =
@@ -18,7 +15,7 @@ let template =
         <span class="bar_dec--beat">rhythm</span><select name="" id="" v-model="type">
             <option v-for="type in types" :label="type" :value="type" :key="type"></option>
         </select>
-        <span class="bar_dec--beat">bpm</span><input class="bar_input--bpm" v-model="bpm" />
+        <span class="bar_dec--beat">bpm</span><input type="number" class="bar_input--bpm" v-model="bpm" />
 
         <span class="bar_dec--beat">chord</span><input class="bar_input--chord"
             v-model="input.chord" />
