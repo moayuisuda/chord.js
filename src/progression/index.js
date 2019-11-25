@@ -43,16 +43,16 @@ let instance = new Vue({
     watch: {
         bpm: {
             handler(val, oldVal) {
-                if(val < 10) {
-                    this.bpm = 10;
-                    return;
-                }
-                if(val > 200) {
-                    this.bpm = 200;
-                    return;
-                }
-
                 antiShake(() => {
+                    if(val < 10) {
+                        this.bpm = 10;
+                        return;
+                    }
+                    if(val > 200) {
+                        this.bpm = 200;
+                        return;
+                    }
+                    
                     this.changeWave();
                     Transport.bpm.value = val;
                     this.caculateTime();
