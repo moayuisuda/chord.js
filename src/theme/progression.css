@@ -21,15 +21,19 @@
 }
 
 .bar_import {
-    color: var(--white_color);
     position: relative;
     overflow: visible;
     margin-right: 20px;
 }
 
-.bar_import::after {
-    box-sizing: border-box;
-    content: '↓Import';
+.import_file {
+    opacity: 0;
+    position: relative;
+    width: 60px;
+}
+
+.import_hover {
+    color: var(--white_color);
     position: absolute;
     top: 0;
     left: 0;
@@ -38,8 +42,11 @@
 }
 
 .bar_export {
-    margin-left: 20px;
+    padding: 1px 7px 2px;
     background-color: var(--main2_color);
+    color: var(--white_color);
+    margin-left: 20px;
+    display: inline-block;
 }
 
 .bar_btn {
