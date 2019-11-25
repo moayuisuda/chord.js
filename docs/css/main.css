@@ -183,21 +183,20 @@ button:active {
 }
 
 .bar_import {
-    width: 80px;
-    color: var(--white_color);
     position: relative;
+    overflow: visible;
     margin-right: 20px;
 }
 
-.bar_import::after {
-    box-sizing: border-box;
-    content: '↓Import';
+.import_file {
+    opacity: 0;
+    position: relative;
+    width: 60px;
+}
+
+.import_hover {
+    color: var(--white_color);
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
     padding: 1px 7px 2px;
@@ -205,8 +204,11 @@ button:active {
 }
 
 .bar_export {
-    margin-left: 20px;
+    padding: 1px 7px 2px;
     background-color: var(--main2_color);
+    color: var(--white_color);
+    margin-left: 20px;
+    display: inline-block;
 }
 
 .bar_btn {
@@ -285,12 +287,10 @@ button:active {
     }
 
     .show_card {
-        padding: 40px;
+        padding: 30px;
     }
 
     .show_card::before {
-        margin-top:40px;
-        margin-bottom: 5vh;
         text-align: center;
         color: var(--main_color);
         display: block;
