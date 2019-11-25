@@ -1,5 +1,6 @@
 import './theme/index.css'
 import './theme/progression.css'
+import './theme/mobile.css'
 
 import {initChord} from './initChord';
 import {initScale} from './initScale';

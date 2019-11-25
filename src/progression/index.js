@@ -248,6 +248,7 @@ let instance = new Vue({
                 item.stop = stop;
                 item.flag = flag++;
 
+                loop.cancel();
                 loop.start(item.start);
 
                 loop.loop = Number(amount);
