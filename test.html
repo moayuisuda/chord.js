@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+
+        .bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="bottom"></div><div class="top"></div>
+</body>
+<script>
+    document.querySelector('.top').addEventListener('click', function() {
+        console.log('top')
+    })
+
+    document.querySelector('.bottom').addEventListener('click', function() {
+        console.log('bottom')
+    })
+</script>
+</html>

@@ -21,9 +21,9 @@
 }
 
 .bar_import {
-    width: 80px;
     color: var(--white_color);
     position: relative;
+    overflow: visible;
     margin-right: 20px;
 }
 
@@ -31,11 +31,6 @@
     box-sizing: border-box;
     content: '↓Import';
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
     padding: 1px 7px 2px;
