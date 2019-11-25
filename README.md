@@ -6,7 +6,9 @@
 ```js
 import {chord, scale, scaleChords} from 'rad.js'
 
-chord('Cm7add11omit5');
+chord('Cm7add11omit5/G');
+chord({root: 'C', type: 'm7', add: ['11'], omit: ['5'], on: 'G'}); // you can also pass param like this.
+
 scale({root: 'C', type: 'ionian'});
 scaleChords({root: 'C', type: 'ionian'});
 ```
@@ -15,7 +17,7 @@ Or you can just use it as a global variable
 ```js
 <script src="./rad.js"></script>
 
-rad.chord('Cm7add11omit5');
+rad.chord('Cm7add11omit5/G');
 rad.scale({root: 'C', type: 'ionian'});
 rad.scaleChords({root: 'C', type: 'ionian'});
 ```
