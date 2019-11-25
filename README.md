@@ -6,7 +6,7 @@
 ```js
 import {chord, scale, scaleChords} from 'rad.js'
 
-chord('Cm7add11omit5/bG');
+chord('Cm7add11omit5/G');
 // tip: if you want to write a 'b' or '#', code like this 'b7' or 'G#'
 chord({root: 'C', type: 'm7', add: ['11'], omit: ['5'], on: 'G'}); // you can also pass param like this.
 
