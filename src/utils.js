@@ -1,4 +1,5 @@
 import {typeMap} from './maps'
+import * as conve from './converters'
 
 function getRoot(str) {
     let result = str.match(/[A-G](#|b)?/);
@@ -82,10 +83,10 @@ function strToOptions(str) {
 function replaceRoot(result, note, initOctave) {
     if (initOctave) {
         let root = result[0];
-        let flagInterval = noteToInterval(result[1]);
-        let noteInterval = noteToInterval(note);
+        let flagInterval = conve.noteToInterval(getRoot(result[1]));
+        let noteInterval = conve.noteToInterval(note);
 
-        if (flagInterval = noteInterval) return;
+        if (flagInterval === noteInterval) return;
         else if (flagInterval > noteInterval) {
             result.splice(0, 1, note + initOctave);
         } else {
