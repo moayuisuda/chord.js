@@ -1,5 +1,5 @@
 <template>
-    <div class="module progression" id="progression" isReplace="true">
+    <div class="progression">
         <h1>PROGRESSION</h1>
         <div class="progression_bar">
             <div type="file" @input="importJson($event)" class="bar_import">
@@ -23,7 +23,7 @@
             <div class="bar_export" @click="exportJson">EXPORT</div>
         </div>
 
-        <div class="progression_input--result">
+        <div class="progression_result">
             <div v-for="item in timeline" :key="item.flag" class="result_item--wrapper">
                 <div :class="['result_item', {'result_item--focus': (item.flag == flag)}]">
                     <div class="item_pannel" :style="{'width': (item.amount / item.single) * 200 +'px'}"
