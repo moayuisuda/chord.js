@@ -51,7 +51,7 @@ h2 {
 .show_card {
     box-shadow: 0 0 6px var(--grey_color);
     padding: 85px;
-    background: linear-gradient(135deg, var(--main2_color) 10%, var(--white_color) 10%);
+    background: linear-gradient(135deg, var(--main2_color) 10%, transparent 10%);
     /* height: 600px; */
 }
 
@@ -187,7 +187,7 @@ button:active {
     --white_color: #ffffff
 }
 
-#progression {
+.progression {
     transform: translate(20px, 0);
     opacity: 0;
     transition: .5s;
@@ -303,21 +303,26 @@ button:active {
     }
 
     .show_card {
-        height: 90%;
+        min-height: 90%;
+        max-height: 100%;
         border-radius: 0 0 50px 50px;
         padding: 30px;
     }
 
     .wave--one {
-        width: 180vh;
-        height: 180vh;
-        border-radius: 80vh;
+        top: -65vh;
+        left: -120vh;
+        width: 200vh;
+        height: 200vh;
+        border-radius: 90vh;
     }
 
     .wave--two {
-        width: 180vh;
-        height: 180vh;
-        border-radius: 80vh;
+        top: -60vh;
+        left: -120vh;
+        width: 200vh;
+        height: 200vh;
+        border-radius: 90vh;
     }
 
     .show_card::before {
@@ -332,6 +337,10 @@ button:active {
         flex-wrap: wrap;
         align-content: space-around;
         height: 120px;
+    }
+
+    .progression_input--result {
+        margin-top: 50px;
     }
 }
 
