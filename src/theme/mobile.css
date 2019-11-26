@@ -28,7 +28,21 @@
     }
 
     .show_card {
+        height: 90%;
+        border-radius: 0 0 50px 50px;
         padding: 30px;
+    }
+
+    .wave--one {
+        width: 180vh;
+        height: 180vh;
+        border-radius: 80vh;
+    }
+
+    .wave--two {
+        width: 180vh;
+        height: 180vh;
+        border-radius: 80vh;
     }
 
     .show_card::before {

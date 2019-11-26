@@ -6,7 +6,10 @@ function lazyLoadProgression() {
         for (let i of entries) {
             console.log(i)
             if (i.isIntersecting) {
-                loading.style.opacity = 0.8;
+                setTimeout(() => {
+                    loading.style.opacity = 0.8;
+                }, 1000);
+                
                 import(
                         './progression/index')
                     .then(mod => {
@@ -16,6 +19,7 @@ function lazyLoadProgression() {
                         setTimeout(() => {
                             loading.style.display = 'none';
                         }, 500);
+                        
                         let el = document.querySelector('#progression');
                         el.offsetTop;
                         el.style.opacity = 1;
