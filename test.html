@@ -23,19 +23,24 @@
             height: 100px;
             background-color: red;
         }
+
+        .inner {
+            height: 100%;
+        }
+
+        .o {
+            height: 100px;
+        }
     </style>
 </head>
 <body>
-    
-    <div class="bottom"></div><div class="top"></div>
+    <div class="o">
+    <div class="outter">
+        ooo
+        <div class="inner"></div>
+    </div></div>
 </body>
 <script>
-    document.querySelector('.top').addEventListener('click', function() {
-        console.log('top')
-    })
 
-    document.querySelector('.bottom').addEventListener('click', function() {
-        console.log('bottom')
-    })
 </script>
 </html>

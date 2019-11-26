@@ -127,9 +127,25 @@ input {
     }
 }
 
-.progression {
+#generator {
     height: 100vh;
     position: relative;
+}
+
+.loading {
+    position: absolute;
+    display: flex;
+    color: var(--main_color);
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    transition: .8s;
+    left: 0;
+    background-color: var(--white_color);
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    
 }
 
 

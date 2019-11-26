@@ -1,15 +1,21 @@
 function lazyLoadProgression() {
     let el = document.querySelector('#progression');
+    let loading = document.querySelector('.loading');
 
     let observer = new IntersectionObserver(entries => {
         for (let i of entries) {
             console.log(i)
             if (i.isIntersecting) {
+                loading.style.opacity = 0.8;
                 import(
                         './progression/index')
                     .then(mod => {
                         mod.instance.$mount(i.target);
 
+                        loading.style.opacity = 0;
+                        setTimeout(() => {
+                            loading.style.display = 'none';
+                        }, 500);
                         let el = document.querySelector('#progression');
                         el.offsetTop;
                         el.style.opacity = 1;
