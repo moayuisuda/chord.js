@@ -1,29 +1,18 @@
-let arr = [1,2,3,4,5,6];
+var isValid = function(s) {
+    let stack = s.split('').reverse();
 
-// function shuffle(arr) {
-//     let i = arr.length;
-//     while (i) {
-//         let j = Math.floor(Math.random() * i--);
-//         console.log(j);
-//         [arr[j], arr[i]] = [arr[i], arr[j]];
-//     }
-//     return arr
-// }
+    for(let i = stack.length - 1; i >= 0; i --) {
+        let index;
+        let item = stack[i];
+        if(stack.lastIndexOf(item) != -1) {
+            index = stack.lastIndexOf(item);
+            stack.pop();
+            stack.splice(index, 1);
+        } 
+    }
 
-// shuffle([1,2,3,4,5])
+    console.log(stack)
+    return stack.length == 0;
+};
 
-let dec = arr => {
-    return arr.filter((value, index, self) => {
-        return self.indexOf(value) === index;
-    })
-}
-
-function getSum() {
-    return arr.reduce((pre, value, index, arr) => {
-        return pre + value;
-    }, 0) 
-}
-
-console.log(dec([1,2,2,3,4,5,5]))
-console.log(getSum([1,2,3,4,5,6]));
-console.log([1,2,3].map(() => {}))
+console.log(isValid('(]'))// 10

@@ -47,5 +47,47 @@
     <div class="inline float"></div>
 </body>
 <script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+ function ListNode(val) {
+     this.val = val;
+     this.next = null;
+ }
+
+ var addTwoNumbers = function(l1, l2) {
+    
+    let head = new ListNode(0);
+    let currentNode = head;
+
+    while(1) {
+        let val = currentNode.val + (l1 && l1.val || 0) + (l2 && l2.val || 0);
+        let carry = Math.floor(val / 10);
+        currentNode.val = val % 10;
+
+        l1 = l1 && l1.next; l2 = l2 && l2.next;
+        if(l1 || l2 || carry) {
+            if(carry) currentNode.next = new ListNode(1);
+            else currentNode.next = new ListNode(0);
+
+            currentNode = currentNode.next;
+        } else break;
+    }
+
+    return head;
+};
+
+let n;
+let b;
+console.log(10 % 10)
 </script>
 </html>

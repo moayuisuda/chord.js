@@ -115,7 +115,6 @@ let instance = new Vue({
         },
 
         addItem({amount, single, chord, type}) {
-            debugger
             let chordArr;
 
             try {
