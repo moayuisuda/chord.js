@@ -32,10 +32,8 @@ let template =
     <div class="progression_result">
         <div v-for="item in timeline" :key="item.flag" class="result_item--wrapper">
             <div :class="['result_item', {'result_item--focus': (item.flag == flag)}]">
-                <div class="item_pannel" :style="{'width': (item.amount / item.single) * 200 +'px'}"
-                    @click="item.focus.call(item)">
-                    {{item.chord}} - {{item.amount + '/' + item.single}}
-                </div>
+                <div class="item_pannel"
+                    @click="item.focus.call(item)">{{item.chord}} - {{item.amount + '/' + item.single}}</div>
                 <button class="item_deleBtn" @click="remove(item)" v-show="playing === false">X</button>
             </div>
         </div>
