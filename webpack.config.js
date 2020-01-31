@@ -13,6 +13,7 @@ module.exports = {
         chunkFilename: 'chunks/[name].min.js'
     },
     devServer: {
+        port: 9999,
         contentBase: path.join(__dirname, 'dist')
     },
     module: {
