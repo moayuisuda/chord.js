@@ -9,7 +9,7 @@
     --white_color: #ffffff
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1350px) {
     .logo {
         display: none;
     }

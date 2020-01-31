@@ -90,6 +90,7 @@
 }
 
 .progression .item_pannel {
+    width: 200px;
     display: inline-block;
     line-height: 30px;
     cursor: pointer;
