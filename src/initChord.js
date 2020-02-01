@@ -1,6 +1,6 @@
 import {
     chord
-} from './rad.js/index'
+} from './chord.js/index'
 
 function initChord() {
     let nameEl = document.querySelector('.chord_name');
@@ -21,6 +21,7 @@ function initChord() {
         let result
         try {
             result = chord(name, octave, signType);
+            console.log('chord', result);
         } catch (e) {
             console.log(e);
             return;

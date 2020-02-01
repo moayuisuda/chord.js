@@ -9,7 +9,7 @@ import {
 } from './sources'
 import {
     chord as getChord
-} from '../rad.js/index'
+} from '../chord.js/index'
 import {
     ChordItem
 } from './chordItem'

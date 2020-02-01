@@ -1,6 +1,6 @@
 import {
     scale
-} from './rad.js/index'
+} from './chord.js/index'
 
 function initScale() {
     let rootEl = document.querySelector('.scale_root');
@@ -23,11 +23,11 @@ function initScale() {
         let result
         try {
             result = scale({root, type}, octave, signType);
+            console.log('scale', result);
         } catch (e) {
             console.log(e);
             return;
         }
-
         let container = document.querySelector('.scale_result');
         if (result) {
             while (container.childNodes[0]) {

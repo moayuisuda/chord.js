@@ -1,6 +1,6 @@
 import {
     scaleChords
-} from './rad.js/index'
+} from './chord.js/index'
 
 
 function initScaleChords() {
@@ -21,11 +21,11 @@ function initScaleChords() {
                 root,
                 type
             });
+            console.log('scaleChords', result);
         } catch (e) {
             console.log(e);
             return;
         }
-        console.log('result', result);
         let container = document.querySelector('.scaleChords_result');
         if (result) {
             while (container.childNodes[0]) {
