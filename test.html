@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+function degreeToInterval(degree) {
+    let num = Number(degree.match(/\d/)[0]);
+    let signal = degree.match(/(b|#)/)[0];
+    let octive = 0;
+    while(num >= 9) {
+        degree -= degree;
+        octive ++;
+    }
+    let interval = degreeMap[signal + (degree % 8)] + octive * 12;
+    if (interval) return interval;
+}
+
+degreeToInterval()
+</script>
+</html>
