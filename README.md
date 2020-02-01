@@ -20,9 +20,9 @@ Or you can just use it as a global variable
 ```js
 <script src="./rad.js"></script>
 
-rad.chord('Cm7add11omit5/G');
-rad.scale({root: 'C', type: 'ionian'});
-rad.scaleChords({root: 'C', type: 'ionian'});
+chord.chord('Cm7add11omit5/G');
+chord.scale({root: 'C', type: 'ionian'});
+chord.scaleChords({root: 'C', type: 'ionian'});
 ```
 
 
