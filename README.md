@@ -18,7 +18,7 @@ scaleChords({root: 'C', type: 'ionian'}); // ["C", "Dm", "Em", "F", "G", "Am", "
 
 Or you can just use it as a global variable
 ```js
-<script src="./rad.js"></script>
+<script src="./chord.js"></script>
 
 chord.chord('Cm7add11omit5/G');
 chord.scale({root: 'C', type: 'ionian'});
