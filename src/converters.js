@@ -102,7 +102,7 @@ function intervalArrToChord([root, third, fifth], signType) {
 function noteToInterval(note) {
     let interval = noteMap[note];
     if (!(Object.prototype.toString.call(interval) === '[object Undefined]')) return interval;
-    else throw `[Rad] Can't convert "${note}" into interval `
+    else throw `[chord] Can't convert "${note}" into interval `
 }
 
 function typeToIntervalArr(type) {
@@ -113,7 +113,7 @@ function typeToIntervalArr(type) {
 function typeToScale(type) {
     let scale = scaleMap[type];
     if (scale) return utils.copy(scale);
-    else throw `[Rad] Can't find a scale matched "${type}"`
+    else throw `[chord] Can't find a scale matched "${type}"`
 }
 
 function intervalToNote(interval) {
@@ -123,7 +123,7 @@ function intervalToNote(interval) {
 function degreeToInterval(degree) {
     let interval = degreeMap[degree];
     if (interval) return interval;
-    else throw `[Rad] Can't find a interval matched "${degree}", the max degree is 15`
+    else throw `[chord] Can't find a interval matched "${degree}", the max degree is 15`
 }
 
 export {

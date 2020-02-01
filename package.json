@@ -1,9 +1,9 @@
 {
-  "name": "rad.js",
+  "name": "chord.js",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/rad.js",
-  "types": "rad.t.js",
+  "main": "dist/chord.js",
+  "types": "chord.t.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",

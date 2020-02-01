@@ -7,9 +7,9 @@ module.exports = {
     },
     output: {
         libraryTarget: 'umd',
-        library: 'rad',
+        library: 'chord',
         path: path.resolve(__dirname, './dist'),
-        filename: 'rad.js'
+        filename: 'chord.js'
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist')
