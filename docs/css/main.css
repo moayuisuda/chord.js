@@ -108,7 +108,7 @@ input {
 }
 
 .logo_text {
-    font-size: 50px;
+    font-size: 40px;
     animation: logo infinite;
     fill: transparent;
     stroke-width: 1;
@@ -268,6 +268,7 @@ button:active {
 }
 
 .progression .item_pannel {
+    width: 200px;
     display: inline-block;
     line-height: 30px;
     cursor: pointer;
@@ -284,7 +285,7 @@ button:active {
     --white_color: #ffffff
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1350px) {
     .logo {
         display: none;
     }
