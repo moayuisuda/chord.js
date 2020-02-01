@@ -4,7 +4,7 @@ import * as conve from './converters'
 function getRoot(str) {
     let result = str.match(/[A-G](#|b)?/);
     if(result) return result[0];
-    throw `[Rad] Can't resolve the root note for "${str}"`
+    throw `[Chord] Can't resolve the root note for "${str}"`
 }
 
 
@@ -24,7 +24,7 @@ function getType(str) {
         }
     }
 
-    throw `[Rad] Can't find a chord type matched "${str}"`;
+    throw `[Chord] Can't find a chord type matched "${str}"`;
 }
 
 
