@@ -9,8 +9,6 @@ function chord(strOrOptions, initOctave, signType) {
     ? caculateChord(strOrOptions, initOctave, signType)
     : caculateChord(strToOptions(strOrOptions), initOctave, signType);
 
-    console.log(chordArr);
-
     return chordArr;
 }
 

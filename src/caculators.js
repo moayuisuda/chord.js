@@ -14,7 +14,6 @@ function caculateChord({
         intervalArr = conve.typeToIntervalArr(type),
         rootInterval = conve.noteToInterval(root);
 
-
     add.map(degree => {
         intervalArr.push(conve.degreeToInterval(degree));
     })
