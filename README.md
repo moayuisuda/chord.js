@@ -1,7 +1,7 @@
 # chord.js
 
 ## :tophat: Get any chord/scale/scaleChords you want.
-### More info in https://moayuisuda.github.io/rad.js/
+### More info in https://moayuisuda.github.io/chord.js/
 
 ```js
 import {chord, scale, scaleChords} from 'rad.js'
