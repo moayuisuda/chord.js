@@ -1,86 +1,79 @@
-import * as utils from './utils';
-import * as conve from './converters'
-import { chord } from '.';
+import * as utils from "./utils";
+import * as conve from "./converters";
 
-function caculateChord({
-    root,
-    type,
-    add,
-    omit,
-    on
-}, initOctave, signType = '#') {
-    let
-        result = [],
-        intervalArr = conve.typeToIntervalArr(type),
-        rootInterval = conve.noteToInterval(root);
+function caculateChord(
+  { root, type, add, omit, on },
+  initOctave,
+  signType = "#"
+) {
+  let result = [],
+    intervalArr = conve.typeToIntervalArr(type),
+    rootInterval = conve.noteToInterval(root);
 
-    add.map(degree => {
-        intervalArr.push(conve.degreeToInterval(degree));
-    })
+  add.map((degree) => {
+    intervalArr.push(conve.degreeToInterval(degree));
+  });
 
-    intervalArr.sort((a, b) => {
-        return a - b;
-    });
+  intervalArr.sort((a, b) => {
+    return a - b;
+  });
 
-    for (let i = 0; i < omit.length; i++) {
-        for (let j = 0; j < intervalArr.length; j++) {
-            if (conve.degreeToInterval(omit[i]) == intervalArr[j])
-                intervalArr.splice(j, 1);
-        }
+  for (let i = 0; i < omit.length; i++) {
+    for (let j = 0; j < intervalArr.length; j++) {
+      if (conve.degreeToInterval(omit[i]) == intervalArr[j])
+        intervalArr.splice(j, 1);
     }
+  }
 
-    let abInterval = conve.absoluteIntervalArr(rootInterval, intervalArr)
-    if (initOctave) result = conve.intervalArrToNotesO(abInterval, initOctave, signType);
-    else result = conve.intervalArrToNotes(abInterval, signType);
+  let abInterval = conve.absoluteIntervalArr(rootInterval, intervalArr);
+  if (initOctave)
+    result = conve.intervalArrToNotesO(abInterval, initOctave, signType);
+  else result = conve.intervalArrToNotes(abInterval, signType);
 
-    if (on) utils.replaceRoot(result, on, initOctave);
-    return result;
+  if (on) utils.replaceRoot(result, on, initOctave);
+  return result;
 }
 
+function caculateScale({ root, type }, initOctave = 4, signType = "#") {
+  let rootInterval = conve.noteToInterval(root),
+    scale = conve.typeToScale(type),
+    intervalArr = conve.scaleToIntervalArr(scale),
+    abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
 
-function caculateScale({
-    root,
-    type,
-}, initOctave = 4, signType = '#') {
-    let rootInterval = conve.noteToInterval(root),
-        scale = conve.typeToScale(type),
-        intervalArr = conve.scaleToIntervalArr(scale),
-        abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
-
-    if (initOctave) return conve.intervalArrToNotesO(abIntervalArr, initOctave, signType);
-    else return conve.intervalArrToNotes(abIntervalArr, signType);
+  if (initOctave)
+    return conve.intervalArrToNotesO(abIntervalArr, initOctave, signType);
+  else return conve.intervalArrToNotes(abIntervalArr, signType);
 }
 
+function caculateScaleChords({ root, type }, signType = "#") {
+  let chordsArr = [],
+    extendIntervalArr = [],
+    rootInterval = conve.noteToInterval(root),
+    intervalArr = conve.scaleToIntervalArr(conve.typeToScale(type)),
+    abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
 
-function caculateScaleChords({
-    root,
-    type
-}, signType = '#') {
-    let
-        chordsArr = [],
-        extendIntervalArr = [],
+  // get the intervalArr with three more notes in a scale
+  extendIntervalArr = extendIntervalArr.concat(abIntervalArr);
 
-        rootInterval = conve.noteToInterval(root),
-        intervalArr = conve.scaleToIntervalArr(conve.typeToScale(type)),
-        abIntervalArr = conve.absoluteIntervalArr(rootInterval, intervalArr);
+  let length = 5;
+  for (let i = 1; i < length; i++) {
+    extendIntervalArr.push(abIntervalArr[i] + 12);
+  }
 
-    // get the intervalArr with three more notes in a scale
-    extendIntervalArr = extendIntervalArr.concat(abIntervalArr);
+  for (let i = 0; i < abIntervalArr.length - 1; i++) {
+    chordsArr.push(
+      conve.intervalArrToChord(
+        [
+          extendIntervalArr[i],
+          extendIntervalArr[i + 2],
+          extendIntervalArr[i + 4],
+        ],
+        signType
+      )
+    );
+  }
 
-    let length = 5;
-    for (let i = 1; i < length; i++) {
-        extendIntervalArr.push(abIntervalArr[i] + 12);
-    }
-
-    for (let i = 0; i < abIntervalArr.length - 1; i++) {
-        chordsArr.push(conve.intervalArrToChord([extendIntervalArr[i], extendIntervalArr[i + 2], extendIntervalArr[i + 4]], signType));
-    }
-
-    return chordsArr;
+  return chordsArr;
 }
 
-export {
-    caculateChord,
-    caculateScaleChords,
-    caculateScale
-}
+export { caculateChord, caculateScaleChords, caculateScale };

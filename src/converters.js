@@ -84,7 +84,8 @@ function intervalArrToChord([root, third, fifth], signType) {
 // map getters
 function noteToInterval(note) {
   let interval = noteMap[note];
-  if (!(Object.prototype.toString.call(interval) === "[object Undefined]")) return interval;
+  if (!(Object.prototype.toString.call(interval) === "[object Undefined]"))
+    return interval;
   else throw `[Chord] Can't convert "${note}" into interval `;
 }
 
@@ -117,4 +118,15 @@ function degreeToInterval(degree) {
   return degreeMap[signal ? signal + num : num] + octive * 12;
 }
 
-export { typeToScale, typeToIntervalArr, absoluteIntervalArr, intervalArrToNotes, intervalArrToNotesO, scaleToIntervalArr, noteToInterval, degreeToInterval, intervalArrToChord };
+export {
+  intervalToNote,
+  typeToScale,
+  typeToIntervalArr,
+  absoluteIntervalArr,
+  intervalArrToNotes,
+  intervalArrToNotesO,
+  scaleToIntervalArr,
+  noteToInterval,
+  degreeToInterval,
+  intervalArrToChord,
+};
