@@ -1,6 +1,6 @@
 {
-  "name": "chord.js",
-  "version": "1.0.1",
+  "name": "rad.js",
+  "version": "1.0.6",
   "description": "",
   "type": "module",
   "main": "src/index.js",
