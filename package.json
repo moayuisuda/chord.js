@@ -1,10 +1,9 @@
 {
   "name": "rad.js",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
-  "types": "chord.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
