@@ -1,9 +1,10 @@
 {
   "name": "rad.js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "type": "module",
   "main": "src/index.js",
+  "module": "src/index.js",
   "types": "chord.t.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
