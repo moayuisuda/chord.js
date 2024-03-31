@@ -1,12 +1,13 @@
 {
   "name": "rad.js",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "watch": "vite build --watch"
   },
   "repository": {
     "type": "git",

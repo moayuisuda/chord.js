@@ -95,6 +95,22 @@ let scaleMap = {
   aeolian: [2, 1, 2, 2, 1, 2, 2],
   minor: [2, 1, 2, 2, 1, 2, 2],
   locrian: [1, 2, 2, 1, 2, 2, 2],
+  melodicMinor: [2, 1, 2, 2, 2, 2, 1],
+  harmonicMinor: [2, 1, 2, 2, 1, 3, 1],
 };
 
-export { typeMap, noteMap, intervalMap, degreeMap, scaleMap };
+let singNameMap = {
+  ionian: ["1", "2", "3", "4", "5", "6", "7"],
+  major: ["1", "2", "3", "4", "5", "6", "7"],
+  dorian: ["1", "2", "b3", "4", "5", "6", "b7"],
+  phrygian: ["1", "b2", "b3", "4", "5", "b6", "b7"],
+  lydian: ["1", "2", "3", "#4", "5", "6", "7"],
+  mixolydian: ["1", "2", "3", "4", "5", "6", "b7"],
+  aeolian: ["1", "2", "b3", "4", "5", "b6", "b7"],
+  minor: ["1", "2", "b3", "4", "5", "b6", "b7"],
+  locrian: ["1", "b2", "b3", "4", "b5", "b6", "b7"],
+  melodicMinor: ["1", "2", "b3", "4", "5", "b6", "7"],
+  harmonicMinor: ["1", "2", "b3", "4", "5", "6", "7"],
+};
+
+export { typeMap, noteMap, intervalMap, degreeMap, scaleMap, singNameMap };
